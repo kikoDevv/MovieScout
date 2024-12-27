@@ -18,15 +18,14 @@
 .header .nav-title-container {
   display: grid;
   width: 100%;
-  max-height: 100px;
 }
 .header .nav-title-container h1,
 .header .nav-title-container h2 {
   color: white;
+  margin: 0px;
 }
 .header .nav-title-container h1 {
   margin: 0px;
-  padding-bottom: 10px;
 }
 .header .nav-title-container .navbar-container {
   display: flex;
@@ -38,6 +37,7 @@
   border-radius: 0px 10px 10px 0px;
   padding: 10px 0px;
   z-index: 1000;
+  margin-bottom: 13px;
 }
 .header .nav-title-container .navbar-container a {
   font-family: "Work Sans", sans-serif;
@@ -347,6 +347,7 @@
 }
 .filterSection .filterMenu .filterByInputSection p {
   padding: 10px;
+  margin: 0px;
 }
 .filterSection .filterMenu .filterByInputSection .containerRight {
   display: flex;
@@ -487,6 +488,11 @@
 }
 #moviesPageBody {
   background-color: #0e0e1b;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 /*# sourceMappingURL=main.css.map */
