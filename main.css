@@ -1,0 +1,492 @@
+.header {
+  display: grid;
+  padding: 20px;
+  background: linear-gradient(45deg, #d2001a, #7462ff, #f48e21, #23d5ab);
+  background-size: 300% 300%;
+  animation: colorAnimation 8s ease-in-out infinite;
+}
+.header .logo-navbar {
+  display: flex;
+}
+.header .logo-navbar .logo {
+  border-radius: 30px 30px 0px 30px;
+}
+.header .logo-navbar .logo .kino-logo {
+  max-width: 200px;
+  max-width: 200px;
+}
+.header .nav-title-container {
+  display: grid;
+  width: 100%;
+  max-height: 100px;
+}
+.header .nav-title-container h1,
+.header .nav-title-container h2 {
+  color: white;
+}
+.header .nav-title-container h1 {
+  margin: 0px;
+  padding-bottom: 10px;
+}
+.header .nav-title-container .navbar-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background: linear-gradient(45deg, #d2001a, #7462ff, #f48e21, #23d5ab);
+  background-size: 300% 300%;
+  animation: colorAnimation 3s ease-in-out infinite;
+  border-radius: 0px 10px 10px 0px;
+  padding: 10px 0px;
+  z-index: 1000;
+}
+.header .nav-title-container .navbar-container a {
+  font-family: "Work Sans", sans-serif;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  z-index: 0;
+  padding: 0px 5px;
+}
+.header .nav-title-container .navbar-container a:hover {
+  color: white;
+}
+.header .nav-title-container .navbar-container a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  transform: scaleY(3);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: -1;
+}
+.header .nav-title-container .navbar-container a:hover::before {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.upperSection {
+  position: relative;
+}
+.upperSection .seatImg {
+  max-width: 100%;
+}
+.upperSection .kinoImg {
+  max-width: 100%;
+  min-width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0px;
+}
+.upperSection .searchSection {
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  top: 45%;
+  left: 48%;
+  transform: translateX(-50%);
+  min-width: 40vw;
+  min-height: 5vh;
+  animation: shrink both;
+  animation-timeline: view();
+}
+.upperSection .searchSection .searchBar {
+  border-radius: 5px 0px 0px 5px;
+  border: none;
+  padding-left: 10px;
+  min-width: 100%;
+  animation: roundBorderSearchBar both;
+  animation-timeline: view();
+}
+.upperSection .searchSection .searchBar:focus {
+  outline: none;
+}
+.upperSection .searchSection .searchBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0px 5px 5px 0px;
+  background-color: rgb(205, 205, 205);
+  color: black;
+  font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  animation: roundBorderBtn both;
+  animation-timeline: view();
+}
+.upperSection .searchSection .searchBtn:hover {
+  background-color: #ffb509;
+  color: white;
+}
+
+@keyframes roundBorderSearchBar {
+  100% {
+    border-radius: 30px 0px 0px 30px;
+  }
+}
+@keyframes roundBorderBtn {
+  100% {
+    border-radius: 0px 30px 30px 0px;
+  }
+}
+.avatarSection {
+  position: relative;
+}
+.avatarSection .highlightsImgs {
+  max-width: 100%;
+}
+.avatarSection .avatarImg {
+  position: absolute;
+  max-width: 60%;
+  min-height: 50%;
+  top: 30%;
+  left: 40%;
+  animation: slide both linear;
+  animation-timeline: view();
+}
+
+@keyframes slide {
+  0% {
+    left: 40%;
+  }
+  50% {
+    left: 20%;
+  }
+  100% {
+    left: 18%;
+  }
+}
+.scrollingSections {
+  display: grid;
+}
+.scrollingSections h1 {
+  margin: 40px 0px;
+  place-self: center;
+  font-family: "Work Sans", sans-serif;
+  user-select: none;
+  color: white;
+}
+.scrollingSections .picsListDown {
+  margin-bottom: 10px;
+  display: flex;
+  list-style-type: none;
+  width: 86%;
+  height: 100px;
+  padding: 10px 0px;
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0) 3%, rgb(0, 0, 0) 97%, rgba(0, 0, 0, 0));
+}
+.scrollingSections .picsListDown .pics {
+  left: max(1350px, 100%);
+  height: 90px;
+  min-width: 150px;
+  max-width: 150px;
+  position: absolute;
+  animation: scroll 30s linear infinite;
+  background-color: aliceblue;
+  border-radius: 10px;
+}
+.scrollingSections .picsListDown .pic1 {
+  animation-delay: -45s;
+}
+.scrollingSections .picsListDown .pic2 {
+  animation-delay: -41.25s;
+}
+.scrollingSections .picsListDown .pic3 {
+  animation-delay: -37.5s;
+}
+.scrollingSections .picsListDown .pic4 {
+  animation-delay: -33.75s;
+}
+.scrollingSections .picsListDown .pic5 {
+  animation-delay: -30s;
+}
+.scrollingSections .picsListDown .pic6 {
+  animation-delay: -26.25s;
+}
+.scrollingSections .picsListDown .pic7 {
+  animation-delay: -22.5s;
+}
+.scrollingSections .picsListDown .pic8 {
+  animation-delay: -18.75s;
+}
+.scrollingSections .picsListUp {
+  margin-top: 20px;
+  display: flex;
+  list-style-type: none;
+  width: 86%;
+  height: 100px;
+  padding: 10px 0px;
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0) 3%, rgb(0, 0, 0) 97%, rgba(0, 0, 0, 0));
+}
+.scrollingSections .picsListUp .pic {
+  right: max(1350px, 100%);
+  height: 90px;
+  min-width: 150px;
+  max-width: 150px;
+  position: absolute;
+  animation: scrollRight 30s linear infinite;
+  background-color: aliceblue;
+  border-radius: 10px;
+}
+.scrollingSections .picsListUp .picx1 {
+  animation-delay: -45s;
+}
+.scrollingSections .picsListUp .picx2 {
+  animation-delay: -41.25s;
+}
+.scrollingSections .picsListUp .picx3 {
+  animation-delay: -37.5s;
+}
+.scrollingSections .picsListUp .picx4 {
+  animation-delay: -33.75s;
+}
+.scrollingSections .picsListUp .picx5 {
+  animation-delay: -30s;
+}
+.scrollingSections .picsListUp .picx6 {
+  animation-delay: -26.25s;
+}
+.scrollingSections .picsListUp .picx7 {
+  animation-delay: -22.5s;
+}
+.scrollingSections .picsListUp .picx8 {
+  animation-delay: -18.75s;
+}
+
+@keyframes scrollRight {
+  to {
+    right: -150px;
+  }
+}
+@keyframes scroll {
+  to {
+    left: -150px;
+  }
+}
+.hidden {
+  display: none;
+}
+
+.filterSection {
+  margin-top: 100px;
+  position: relative;
+}
+.filterSection .filterBtn {
+  position: absolute;
+  padding: 20px 15px;
+  font-size: larger;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(255, 206, 206);
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999px;
+}
+.filterSection .filterBtn:hover {
+  background-color: red;
+  color: white;
+}
+.filterSection .filterMenu {
+  display: grid;
+  place-self: center;
+  padding: 50px;
+  box-shadow: black 0px 0px 3px 0.8px;
+  border-radius: 20px;
+  user-select: none;
+  background-color: aliceblue;
+}
+.filterSection .filterMenu .line {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.filterSection .filterMenu .tagsContainer {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+.filterSection .filterMenu .tagsContainer .tags {
+  font-family: "Work Sans", sans-serif;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px 0.008px;
+}
+.filterSection .filterMenu .tagsContainer .tags:hover {
+  background-color: aqua;
+  color: white;
+}
+.filterSection .filterMenu .filterByInputSection {
+  display: flex;
+  justify-content: space-between;
+}
+.filterSection .filterMenu .filterByInputSection .containerLeft {
+  display: flex;
+}
+.filterSection .filterMenu .filterByInputSection .containerLeft .input {
+  width: 150px;
+  padding-left: 5px;
+  border: none;
+  box-shadow: black 0px 0px 0px 0.3px;
+  border-radius: 7px;
+}
+.filterSection .filterMenu .filterByInputSection .containerLeft .input:focus {
+  outline: none;
+}
+.filterSection .filterMenu .filterByInputSection p {
+  padding: 10px;
+}
+.filterSection .filterMenu .filterByInputSection .containerRight {
+  display: flex;
+}
+.filterSection .filterMenu .filterByInputSection .containerRight .input {
+  width: 150px;
+  padding-left: 5px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: black 0px 0px 0px 0.3px;
+}
+.filterSection .filterMenu .submitBtn {
+  padding: 10px 20px;
+  max-width: fit-content;
+  place-self: center;
+  border-radius: 9px;
+  border: none;
+  font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: black 0px 0px 6px 0.3px;
+  background-color: #2d7dfe;
+}
+.filterSection .filterMenu .submitBtn:hover {
+  background-color: #ffb509;
+  color: white;
+}
+
+.moviesLine {
+  margin: 100px 0px;
+}
+
+.moviesSection {
+  padding: 0px 20px 0px 20px;
+}
+.moviesSection .cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  justify-items: center;
+}
+.moviesSection .cardContainer .movieCard {
+  display: grid;
+  background-color: #101827;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+.moviesSection .cardContainer .movieCard:hover {
+  box-shadow: #ffb509 0px 0px 9px 4px;
+  scale: 1.009;
+}
+.moviesSection .cardContainer .movieCard .moviesImg {
+  width: 100%;
+}
+.moviesSection .cardContainer .movieCard .cardInfo {
+  display: grid;
+  padding: 10px;
+  font-family: sans-serif;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .moviesName {
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  place-self: center;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .moviesDes {
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .buyBtn {
+  margin-top: 20px;
+  max-width: fit-content;
+  place-self: center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #2d7dfe;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .buyBtn:hover {
+  background-color: #ffb509;
+  color: white;
+}
+
+.footer {
+  padding: 0px 50px 100px 0px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.footer .containerLeft {
+  display: grid;
+  color: white;
+}
+.footer .containerLeft h1, .footer .containerLeft p {
+  font-family: "Work Sans", sans-serif;
+  padding: 10px 0px;
+}
+.footer .containerMid {
+  display: grid;
+  color: white;
+}
+.footer .containerMid h1, .footer .containerMid p {
+  font-family: "Work Sans", sans-serif;
+  padding: 10px 0px;
+}
+.footer .containerRight {
+  display: grid;
+  color: white;
+}
+.footer .containerRight h1, .footer .containerRight p {
+  font-family: "Work Sans", sans-serif;
+  padding: 10px 0px;
+}
+
+@keyframes shrink {
+  0% {
+    min-width: 40vw;
+  }
+  100% {
+    min-width: 20vw;
+  }
+}
+@keyframes colorAnimation {
+  0% {
+    background-position: 0 20%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+#moviesPageBody {
+  background-color: #0e0e1b;
+}
+
+/*# sourceMappingURL=main.css.map */
