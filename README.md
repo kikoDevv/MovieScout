@@ -1,4 +1,4 @@
+A school project to make a simple designed cinema webside.
 
-
-https://github.com/user-attachments/assets/927f80c6-3e87-4ac1-9948-2ac64705fa9f
+https://github.com/user-attachments/assets/9a560fe9-88a7-405f-a6c7-20f8be2d0198
 
