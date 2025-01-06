@@ -424,6 +424,7 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 15px;
       justify-items: center;
+      row-gap: 100px;
       .movieCard {
          display: grid;
          background-color: #101827;
@@ -431,6 +432,7 @@
          overflow: hidden;
          height: 100%;
          width: 100%;
+         // max-height: 500px;
          &:hover{
             box-shadow: #ffb509 0px 0px 9px 4px;
             scale: 1.009;

@@ -388,6 +388,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 15px;
   justify-items: center;
+  row-gap: 100px;
 }
 .moviesSection .cardContainer .movieCard {
   display: grid;
