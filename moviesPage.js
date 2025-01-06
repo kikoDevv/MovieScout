@@ -53,6 +53,11 @@ async function fetchData() {
         const response = await fetch(url, options);
         const data = await response.json();
         //---------------create movie card from api-----------
+        console.log(data.length);
+        data.forEach(movie => {
+            createMovieCard(movie.primaryImage, movie.title, movie.description);
+        });
+
     } catch (error) {
         console.error(error);
     }
