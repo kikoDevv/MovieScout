@@ -410,6 +410,7 @@
   font-family: sans-serif;
 }
 .moviesSection .cardContainer .movieCard .cardInfo .moviesName {
+  margin: 0px;
   color: white;
   font-family: "Work Sans", sans-serif;
   place-self: center;
@@ -438,33 +439,56 @@
 }
 
 .footer {
-  padding: 0px 50px 100px 0px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+.footer .footer-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.footer .containerLeft {
-  display: grid;
-  color: white;
+.footer .footer-section {
+  flex: 1;
+  margin: 10px;
+  min-width: 200px;
 }
-.footer .containerLeft h1, .footer .containerLeft p {
-  font-family: "Work Sans", sans-serif;
-  padding: 10px 0px;
+.footer .footer-section h3 {
+  margin-bottom: 15px;
 }
-.footer .containerMid {
-  display: grid;
-  color: white;
+.footer .footer-section p, .footer .footer-section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.footer .containerMid h1, .footer .containerMid p {
-  font-family: "Work Sans", sans-serif;
-  padding: 10px 0px;
+.footer .footer-section ul li {
+  margin-bottom: 10px;
 }
-.footer .containerRight {
-  display: grid;
-  color: white;
+.footer .footer-section ul li a {
+  color: #fff;
+  text-decoration: none;
 }
-.footer .containerRight h1, .footer .containerRight p {
-  font-family: "Work Sans", sans-serif;
-  padding: 10px 0px;
+.footer .footer-section ul li a:hover {
+  text-decoration: underline;
+}
+.footer .footer-section .social-icons {
+  display: flex;
+  justify-content: center;
+}
+.footer .footer-section .social-icons a {
+  color: #fff;
+  margin: 0 10px;
+  font-size: 20px;
+  text-decoration: none;
+}
+.footer .footer-section .social-icons a:hover {
+  color: #ff6347;
+}
+.footer .footer-bottom {
+  margin-top: 20px;
 }
 
 @keyframes shrink {

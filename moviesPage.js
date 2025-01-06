@@ -52,22 +52,29 @@ async function fetchData() {
     try {
         const response = await fetch(url, options);
         const data = await response.json();
-        //---------------create movie card from api-----------
-        console.log(data.length);
-        data.forEach(movie => {
-            createMovieCard(movie.primaryImage, movie.title, movie.description);
-        });
+        // Log the entire data object to inspect its structure
+        console.log(data);
 
+        // Shuffle the array of movies
+        const shuffledMovies = data.sort(() => 0.5 - Math.random());
+
+        // Get the first 20 movies
+        const selectedMovies = shuffledMovies.slice(0, 20);
+
+        // Create movie cards from the selected movies
+        selectedMovies.forEach(movie => {
+            createMovieCard(movie.primaryImage, movie.title, movie.description, movie.id);
+        });
     } catch (error) {
         console.error(error);
     }
 }
 
-//------------create movie card----------------
-function createMovieCard(img, name, desc) {
+//------------function to create movie card----------------
+function createMovieCard(img, name, desc, id) {
     const cardContainer = document.querySelector('.cardContainer');
     const movieCardHTML = `
-        <div class="movieCard">
+        <div class="movieCard" id="${id}">
             <img
                 class="moviesImg"
                 src="${img}"

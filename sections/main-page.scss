@@ -444,6 +444,7 @@
             padding: 10px;
             font-family: sans-serif;
             .moviesName {
+               margin: 0px;
                color: white;
                font-family: "Work Sans", sans-serif;
                place-self: center;
@@ -477,33 +478,67 @@
 }
 //-----------movie cards enden-------------
 //-----------------------footer---------------
-.footer{
-   padding: 0px 50px 100px 0px;
-   display: flex;
-   justify-content: space-evenly;
-   .containerLeft{
-      display: grid;
-      color: white;
-      h1, p{
-         font-family: "Work Sans", sans-serif;
-         padding: 10px 0px;
-      }
+.footer {
+   background-color: #333;
+   color: #fff;
+   padding: 20px 0;
+   text-align: center;
+
+   .footer-container {
+       display: flex;
+       justify-content: space-around;
+       flex-wrap: wrap;
+       max-width: 1200px;
+       margin: 0 auto;
    }
-   .containerMid{
-      display: grid;
-      color: white;
-      h1, p{
-         font-family: "Work Sans", sans-serif;
-         padding: 10px 0px;
-      }
+
+   .footer-section {
+       flex: 1;
+       margin: 10px;
+       min-width: 200px;
+
+       h3 {
+           margin-bottom: 15px;
+       }
+
+       p, ul {
+           margin: 0;
+           padding: 0;
+           list-style: none;
+       }
+
+       ul li {
+           margin-bottom: 10px;
+       }
+
+       ul li a {
+           color: #fff;
+           text-decoration: none;
+
+           &:hover {
+               text-decoration: underline;
+           }
+       }
+
+       .social-icons {
+           display: flex;
+           justify-content: center;
+
+           a {
+               color: #fff;
+               margin: 0 10px;
+               font-size: 20px;
+               text-decoration: none;
+
+               &:hover {
+                   color: #ff6347; // Change color on hover
+               }
+           }
+       }
    }
-   .containerRight{
-      display: grid;
-      color: white;
-      h1, p{
-         font-family: "Work Sans", sans-serif;
-         padding: 10px 0px;
-      }
+
+   .footer-bottom {
+       margin-top: 20px;
    }
 }
 //---------------footer ended--------
