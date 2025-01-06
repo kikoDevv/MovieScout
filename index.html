@@ -1,175 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <link rel="stylesheet" href="main.css" />
-      <link
-         rel="stylesheet"
-         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-   </head>
-   <body id="moviesPageBody">
-      <header class="header">
-         <div class="logo-navbar">
-            <div class="logo">
-               <img class="kino-logo" src="pics/kino-logo.png" />
-            </div>
-            <div class="nav-title-container">
-               <h1>KINO</h1>
-               <h2>FILM SOM ROAR</h2>
-               <h2>OCH EVEN OROAR</h2>
-               <div class="navbar-container">
-                  <a href="#">New events</a>
-                  <a href="#">New movies</a>
-                  <a href="#">The story</a>
-                  <a href="#">Contact us</a>
-               </div>
-            </div>
-         </div>
-      </header>
-      <main class="main">
-         <section class="upperSection">
-            <div class="searchSection">
-               <input class="searchBar" type="search" />
-               <button class="searchBtn">Search</button>
-            </div>
-            <img class="seatImg" src="pics/seat.jpg" />
-            <img class="kinoImg" src="pics/logo_header_computer.png" />
-         </section>
-         <section class="avatarSection">
-            <img class="highlightsImgs" src="pics/avatarBackground.jpg" />
-            <img class="avatarImg" src="pics/avatarpng.png" />
-         </section>
-         <section class="scrollingSections">
-            <h1>Movie production companies we work with</h1>
-            <ul class="picsListUp">
-               <img
-                  class="pic picx1"
-                  src="pics/universal.png"
-                  alt="Image not found" />
-               <img
-                  class="pic picx2"
-                  src="pics/warner.png"
-                  alt="Image not found" />
-               <img
-                  class="pic picx3"
-                  src="pics/paramount.png"
-                  alt="Image not found" />
-               <img
-                  class="pic picx4"
-                  src="pics/prime.png"
-                  alt="Image not found" />
-               <img
-                  class="pic picx5"
-                  src="pics/disney.png"
-                  alt="Image not found" />
-               <img
-                  class="pic picx6"
-                  src="pics/dreamworks.png"
-                  alt="Image not found" />
-               <img
-                  class="pic picx7"
-                  src="pics/pixar.png"
-                  alt="Image not found" />
-               <img
-                  class="pic picx8"
-                  src="pics/hbo.png"
-                  alt="Image not found" />
-            </ul>
-            <ul class="picsListDown">
-               <img
-                  class="pics pic1"
-                  src="pics/dreamworks.png"
-                  alt="Image not found" />
-               <img
-                  class="pics pic2"
-                  src="pics/netflix.png"
-                  alt="Image not found" />
-               <img
-                  class="pics pic3"
-                  src="pics/marvel.png"
-                  alt="Image not found" />
-               <img
-                  class="pics pic4"
-                  src="pics/lucas.png"
-                  alt="Image not found" />
-               <img
-                  class="pics pic5"
-                  src="pics/disney.png"
-                  alt="Image not found" />
-               <img
-                  class="pics pic6"
-                  src="pics/newcinema.png"
-                  alt="Image not found" />
-               <img
-                  class="pics pic7"
-                  src="pics/pixar.png"
-                  alt="Image not found" />
-               <img
-                  class="pics pic8"
-                  src="pics/hbo.png"
-                  alt="Image not found" />
-            </ul>
-         </section>
-         <section class="filterSection">
-            <button class="filterBtn fa-solid fa-xmark fa-2xl"></button>
-            <div class="filterMenu">
-               <p>Filter by genres</p>
-               <div class="tagsContainer">
-                  <button class="tags drama">Drama</button>
-                  <button class="tags adventure">Adventure</button>
-                  <button class="tags crime">Crime</button>
-                  <button class="tags action">Action</button>
-                  <button class="tags Comedy">Comedy</button>
-                  <button class="tags sci">Sci-Fi</button>
-                  <button class="tags fantacy">Fantacy</button>
-                  <button class="tags kids">Kids</button>
-               </div>
-               <hr class="line" />
-               <p>Filter by released year</p>
-               <section class="filterByInputSection">
-                  <form class="containerLeft">
-                     <input
-                        class="input releaseYfrom"
-                        type="number"
-                        min="1900"
-                        max="2025"
-                        placeholder="Release year from" />
-                     <p>To</p>
-                     <input
-                        class="input releaseYto"
-                        type="number"
-                        min="1900"
-                        max="2025"
-                        placeholder="Release year to" />
-                  </form>
-                  <form class="containerRight">
-                     <input
-                        class="input ratingFrom"
-                        type="number"
-                        step="0.1"
-                        min="1"
-                        max="10"
-                        placeholder="Rating from" />
-                     <p>To</p>
-                     <input
-                        class="input ratingTo"
-                        type="number"
-                        step="0.1"
-                        min="1"
-                        max="10"
-                        placeholder="Rating to" />
-                  </form>
-               </section>
-               <hr class="line" />
-               <button class="submitBtn">Submit Filter</button>
-            </div>
-         </section>
-         <section class="moviesSection">
-            <hr class="moviesLine" />
-            <div class="cardContainer">
-               <!-- <div class="movieCard">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="main.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+		/>
+	</head>
+	<body id="moviesPageBody">
+		<header class="header">
+			<div class="logo-navbar">
+				<div class="logo">
+					<img class="kino-logo" src="pics/kino-logo.png" />
+				</div>
+				<div class="nav-title-container">
+					<h1>KINO</h1>
+					<h2>FILM SOM ROAR</h2>
+					<h2>OCH EVEN OROAR</h2>
+					<div class="navbar-container">
+						<a href="#">New events</a>
+						<a href="#">New movies</a>
+						<a href="#">The story</a>
+						<a href="#">Contact us</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="main">
+			<section class="upperSection">
+				<div class="searchSection">
+					<input class="searchBar" type="search" />
+					<button class="searchBtn">Search</button>
+				</div>
+				<img class="seatImg" src="pics/seat.jpg" />
+				<img class="kinoImg" src="pics/logo_header_computer.png" />
+			</section>
+			<section class="avatarSection">
+				<img class="highlightsImgs" src="pics/avatarBackground.jpg" />
+				<img class="avatarImg" src="pics/avatarpng.png" />
+			</section>
+			<section class="scrollingSections">
+				<h1>Movie production companies we work with</h1>
+				<ul class="picsListUp">
+					<img
+						class="pic picx1"
+						src="pics/universal.png"
+						alt="Image not found"
+					/>
+					<img class="pic picx2" src="pics/warner.png" alt="Image not found" />
+					<img
+						class="pic picx3"
+						src="pics/paramount.png"
+						alt="Image not found"
+					/>
+					<img class="pic picx4" src="pics/prime.png" alt="Image not found" />
+					<img class="pic picx5" src="pics/disney.png" alt="Image not found" />
+					<img
+						class="pic picx6"
+						src="pics/dreamworks.png"
+						alt="Image not found"
+					/>
+					<img class="pic picx7" src="pics/pixar.png" alt="Image not found" />
+					<img class="pic picx8" src="pics/hbo.png" alt="Image not found" />
+				</ul>
+				<ul class="picsListDown">
+					<img
+						class="pics pic1"
+						src="pics/dreamworks.png"
+						alt="Image not found"
+					/>
+					<img class="pics pic2" src="pics/netflix.png" alt="Image not found" />
+					<img class="pics pic3" src="pics/marvel.png" alt="Image not found" />
+					<img class="pics pic4" src="pics/lucas.png" alt="Image not found" />
+					<img class="pics pic5" src="pics/disney.png" alt="Image not found" />
+					<img
+						class="pics pic6"
+						src="pics/newcinema.png"
+						alt="Image not found"
+					/>
+					<img class="pics pic7" src="pics/pixar.png" alt="Image not found" />
+					<img class="pics pic8" src="pics/hbo.png" alt="Image not found" />
+				</ul>
+			</section>
+			<section class="filterSection">
+				<button class="filterBtn fa-solid fa-xmark fa-2xl"></button>
+				<div class="filterMenu">
+					<p>Filter by genres</p>
+					<div class="tagsContainer">
+						<button class="tags drama">Drama</button>
+						<button class="tags adventure">Adventure</button>
+						<button class="tags crime">Crime</button>
+						<button class="tags action">Action</button>
+						<button class="tags Comedy">Comedy</button>
+						<button class="tags sci">Sci-Fi</button>
+						<button class="tags fantacy">Fantacy</button>
+						<button class="tags kids">Kids</button>
+					</div>
+					<hr class="line" />
+					<p>Filter by released year</p>
+					<section class="filterByInputSection">
+						<form class="containerLeft">
+							<input
+								class="input releaseYfrom"
+								type="number"
+								min="1900"
+								max="2025"
+								placeholder="Release year from"
+							/>
+							<p>To</p>
+							<input
+								class="input releaseYto"
+								type="number"
+								min="1900"
+								max="2025"
+								placeholder="Release year to"
+							/>
+						</form>
+						<form class="containerRight">
+							<input
+								class="input ratingFrom"
+								type="number"
+								step="0.1"
+								min="1"
+								max="10"
+								placeholder="Rating from"
+							/>
+							<p>To</p>
+							<input
+								class="input ratingTo"
+								type="number"
+								step="0.1"
+								min="1"
+								max="10"
+								placeholder="Rating to"
+							/>
+						</form>
+					</section>
+					<hr class="line" />
+					<button class="submitBtn">Submit Filter</button>
+				</div>
+			</section>
+			<section class="moviesSection">
+				<hr class="moviesLine" />
+				<div class="cardContainer">
+					<!-- <div class="movieCard">
                   <img
                      class="moviesImg"
                      src="pics/m.jpeg"
@@ -182,39 +159,43 @@
                      <button class="buyBtn">Buy ticket</button>
                   </div>
                </div> -->
-            </div>
-         </section>
-      </main>
-      <hr class="moviesLine">
-      <footer class="footer">
-         <div class="footer-container">
-            <div class="footer-section">
-               <h3>About Us</h3>
-               <p>Welcome to Kino, your go-to source for the latest trending movies and reviews. Stay updated with the newest releases and enjoy our curated content.</p>
-            </div>
-            <div class="footer-section">
-               <h3>Quick Links</h3>
-               <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Movies</a></li>
-                  <li><a href="#">Contact</a></li>
-                  <li><a href="#">About</a></li>
-               </ul>
-            </div>
-            <div class="footer-section">
-               <h3>Follow Us</h3>
-               <div class="social-icons">
-                  <a href="#"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
-               </div>
-            </div>
-         </div>
-         <div class="footer-bottom">
-            <p>&copy; 2025 Cinema. All rights reserved, Kiko.devv@gmail.com.</p>
-         </div>
-      </footer>
-      <script src="moviesPage.js"></script>
-   </body>
+				</div>
+			</section>
+		</main>
+		<hr class="moviesLine" />
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-section">
+					<h3>About Us</h3>
+					<p>
+						Welcome to Kino, your go-to source for the latest trending movies
+						and reviews. Stay updated with the newest releases and enjoy our
+						curated content.
+					</p>
+				</div>
+				<div class="footer-section">
+					<h3>Quick Links</h3>
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Movies</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">About</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h3>Follow Us</h3>
+					<div class="social-icons">
+						<a href="#"><i class="fab fa-facebook-f"></i></a>
+						<a href="#"><i class="fab fa-twitter"></i></a>
+						<a href="#"><i class="fab fa-instagram"></i></a>
+						<a href="#"><i class="fab fa-linkedin-in"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2025 Cinema. All rights reserved, Kiko.devv@gmail.com.</p>
+			</div>
+		</footer>
+		<script src="moviesPage.js"></script>
+	</body>
 </html>

@@ -306,6 +306,7 @@
   border-radius: 20px;
   user-select: none;
   background-color: aliceblue;
+  animation: faideIn 0.3s ease-in-out;
 }
 .filterSection .filterMenu .line {
   margin-top: 30px;
@@ -376,6 +377,20 @@
   color: white;
 }
 
+@keyframes faideIn {
+  0% {
+    scale: 0.5;
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+    scale: 1.1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
 .moviesLine {
   margin: 100px 0px;
 }
