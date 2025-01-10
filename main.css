@@ -431,11 +431,47 @@
   font-family: "Work Sans", sans-serif;
   place-self: center;
 }
-.moviesSection .cardContainer .movieCard .cardInfo .moviesDes {
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo {
+  display: flex;
+  justify-content: space-around;
+  user-select: none;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .rating {
+  display: flex;
+  padding: 0px;
+  align-items: center;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .rating i {
+  color: yellow;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .rating .ratingNumber {
+  margin: 0px 0px 0px 5px;
+  padding: 0px;
   color: white;
-  font-family: "Work Sans", sans-serif;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .year {
+  display: flex;
+  align-items: center;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .year i {
+  color: yellow;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .year p {
+  padding: 0px;
+  margin-left: 5px;
+  color: white;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .runtime {
+  display: flex;
+  align-items: center;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .runtime i {
+  color: yellow;
+}
+.moviesSection .cardContainer .movieCard .cardInfo .movieInfo .runtime p {
+  padding: 0px;
+  margin-left: 5px;
+  color: white;
 }
 .moviesSection .cardContainer .movieCard .cardInfo .buyBtn {
   margin-top: 20px;

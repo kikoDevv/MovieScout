@@ -466,13 +466,56 @@
                font-family: "Work Sans", sans-serif;
                place-self: center;
             }
-            .moviesDes {
-               color: white;
-               font-family: "Work Sans", sans-serif;
-               // max-width: 80%;
-               overflow: hidden;
-               text-overflow: ellipsis;
+            .movieInfo{
+               display: flex;
+               justify-content: space-around;
+               user-select: none;
+               .rating{
+                  display: flex;
+                  padding: 0px;
+                  // background-color:white;
+                  align-items: center;
+                  i{
+                     color: yellow;
+                  }
+                  .ratingNumber{
+                     margin: 0px 0px 0px 5px;
+                     padding: 0px;
+                     color: white;
+                  }
+               }
+               .year{
+                  display: flex;
+                  align-items: center;
+                  i{
+                     color: yellow;
+                  }
+                  p{
+                     padding: 0px;
+                     margin-left: 5px;
+                     color: white;
+                  }
+               }
+               .runtime{
+                  display: flex;
+                  align-items: center;
+                  i{
+                     color: yellow;
+                  }
+                  p{
+                     padding: 0px;
+                     margin-left: 5px;
+                     color: white;
+                  }
+               }
             }
+            // .moviesDes {
+            //    color: white;
+            //    font-family: "Work Sans", sans-serif;
+            //    // max-width: 80%;
+            //    overflow: hidden;
+            //    text-overflow: ellipsis;
+            // }
             .buyBtn {
                margin-top: 20px;
                max-width: fit-content;
