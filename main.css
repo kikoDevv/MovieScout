@@ -412,10 +412,11 @@
   overflow: hidden;
   height: 100%;
   width: 100%;
+  transition: all 0.3s;
 }
 .moviesSection .cardContainer .movieCard:hover {
   box-shadow: #ffb509 0px 0px 9px 4px;
-  scale: 1.009;
+  scale: 1.03;
 }
 .moviesSection .cardContainer .movieCard .moviesImg {
   height: 50vh;
@@ -512,7 +513,8 @@
 .footer .footer-section h3 {
   margin-bottom: 15px;
 }
-.footer .footer-section p, .footer .footer-section ul {
+.footer .footer-section p,
+.footer .footer-section ul {
   margin: 0;
   padding: 0;
   list-style: none;
