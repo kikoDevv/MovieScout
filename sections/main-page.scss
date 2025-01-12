@@ -334,7 +334,7 @@
 		}
 	}
 	.filterMenu {
-		display: grid;
+		display: none;
 		place-self: center;
 		padding: 50px;
 		box-shadow: black 0px 0px 3px 0.8px;
@@ -511,7 +511,7 @@
 					}
 				}
 				.buyBtn {
-					margin-top: 20px;
+					margin-top: 10px;
 					max-width: fit-content;
 					place-self: center;
 					padding: 10px 20px;
