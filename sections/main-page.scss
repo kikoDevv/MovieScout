@@ -322,7 +322,6 @@
 		border-radius: 50px;
 		border: none;
 		cursor: pointer;
-		// box-shadow: 0px 0px 3px 0.03px;
 		background-color: rgb(255, 206, 206);
 		top: -20px;
 		left: 50%;
@@ -340,7 +339,9 @@
 		box-shadow: black 0px 0px 3px 0.8px;
 		border-radius: 20px;
 		user-select: none;
-		background-color: aliceblue;
+		//------glassmorphism color
+		background-color: rgb(255, 255, 255, 0.3);
+		backdrop-filter: blur(20px);
 		animation: faideIn 0.3s ease-in-out;
 		.line {
 			margin-top: 30px;
@@ -432,7 +433,7 @@
 }
 .moviesSection {
 	display: grid;
-	h2{
+	h2 {
 		color: white;
 		font-family: sans-serif;
 		margin: 0px 0px 0px 25px;
@@ -453,14 +454,15 @@
 		scroll-snap-type: x mandatory;
 		gap: 20px;
 		padding: 20px 20px;
-		&::-webkit-scrollbar{
+		&::-webkit-scrollbar {
 			display: none;
 		}
 		.movieCard {
 			border-radius: 20px;
 			overflow: hidden;
 			flex: 0 0 auto;
-			background-color: #101827;
+			background-color: rgba(86, 79, 79, 0.3);
+			backdrop-filter: blur(20px);
 			transition: all 0.3s;
 			cursor: pointer;
 			&:hover {
@@ -642,6 +644,9 @@
 	// background-color: #2d2d2dca;
 	background-color: #0e0e1b;
 	// font-family: "Work Sans", sans-serif;
+	// background-color: rgba(0, 0, 0, 0.725);
+	// backdrop-filter: blur(20px);
+
 }
 body {
 	margin: 0;
