@@ -435,20 +435,31 @@
 .moviesSection {
 	padding: 0px 20px 0px 20px;
 	.cardContainer {
+		// display: grid;
+		// grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		// gap: 15px;
+		// justify-items: center;
+		// row-gap: 100px;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-auto-flow: column;
+		grid-auto-columns: minmax(300px, 1fr);
+		overflow-x: scroll;
+		scroll-snap-type: x mandatory;
 		gap: 15px;
-		justify-items: center;
-		row-gap: 100px;
+		padding: 20px 0px;
 		.movieCard {
-			display: grid;
-			background-color: #101827;
-			border-radius: 10px;
+			// display: grid;
+			// background-color: #101827;
+			// border-radius: 10px;
+			// overflow: hidden;
+			// height: 100%;
+			// width: 100%;
+			// transition: all 0.3s;
+			// padding-top: 20px;
+			border-radius: 20px;
 			overflow: hidden;
-			height: 100%;
-			width: 100%;
-			transition: all 0.3s;
-			// max-height: 500px;
+			flex: 0 0 auto;
+			background-color: #101827;
 			&:hover {
 				box-shadow: #ffb509 0px 0px 9px 4px;
 				scale: 1.03;

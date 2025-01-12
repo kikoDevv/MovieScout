@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 //------------movie api-----------------
 fetchData();
+//----------function to fetch data from api-------
 async function fetchData() {
 	const url = "https://imdb236.p.rapidapi.com/imdb/most-popular-movies";
 	const options = {
@@ -49,10 +50,13 @@ async function fetchData() {
 	try {
 		const response = await fetch(url, options);
 		const data = await response.json();
+		const topRatedMovies = data
+			.sort((a, b) => b.averageRating - a.averageRating)
+			.slice(0, 10);
 		//---------------create movie card from api-----------
 		console.log(data.length);
 		console.log(data);
-		data.forEach((movie) => {
+		topRatedMovies.forEach((movie) => {
 			createMovieCard(
 				movie.primaryImage,
 				movie.title,
