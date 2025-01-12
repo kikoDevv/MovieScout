@@ -71,7 +71,9 @@ async function fetchData() {
 		//-----new realased movies--------------
 		const responseTvShow = await fetch(urlTvShows, options);
 		const tvShowData = await responseTvShow.json();
-		const topTvShows = tvShowData.sort((a, b) => b.averageRating - a.averageRating).slice(0, 30);
+		const topTvShows = tvShowData
+			.sort((a, b) => b.averageRating - a.averageRating)
+			.slice(0, 30);
 		console.log(tvShowData);
 
 		topTvShows.forEach((tvShow) => {
