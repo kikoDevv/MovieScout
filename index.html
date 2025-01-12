@@ -10,6 +10,7 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
 		/>
 	</head>
+	<!----------body-------------->
 	<body id="moviesPageBody">
 		<header class="header">
 			<div class="logo-navbar">
@@ -42,6 +43,7 @@
 				<img class="highlightsImgs" src="pics/avatarBackground.jpg" />
 				<img class="avatarImg" src="pics/avatarpng.png" />
 			</section>
+			<!----------------companys logo---------------->
 			<section class="scrollingSections">
 				<h1>Movie production companies we work with</h1>
 				<ul class="picsListUp">
@@ -85,6 +87,7 @@
 					<img class="pics pic8" src="pics/hbo.png" alt="Image not found" />
 				</ul>
 			</section>
+			<!----------------filter section-------------->
 			<section class="filterSection">
 				<button class="filterBtn fa-solid fa-xmark fa-2xl"></button>
 				<div class="filterMenu">
@@ -143,9 +146,13 @@
 					<button class="submitBtn">Submit Filter</button>
 				</div>
 			</section>
+			<!-------------------movie section---------------->
 			<section class="moviesSection">
 				<hr class="moviesLine" />
-				<div class="cardContainer"></div>
+				<h2>Most popular movies ></h2>
+				<div class="cardContainer" id="topTen"></div>
+				<h2>Most popular TV shows ></h2>
+				<div class="cardContainer" id="topTvShows"></div>
 			</section>
 		</main>
 		<hr class="moviesLine" />

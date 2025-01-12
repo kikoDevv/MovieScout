@@ -39,7 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
 fetchData();
 //----------function to fetch data from api-------
 async function fetchData() {
-	const url = "https://imdb236.p.rapidapi.com/imdb/most-popular-movies";
+	const urlMoves = "https://imdb236.p.rapidapi.com/imdb/most-popular-movies";
+	const urlTvShows = "https://imdb236.p.rapidapi.com/imdb/most-popular-tv";
 	const options = {
 		method: "GET",
 		headers: {
@@ -48,21 +49,39 @@ async function fetchData() {
 		},
 	};
 	try {
-		const response = await fetch(url, options);
+		//---------------get top movies--------------
+		const response = await fetch(urlMoves, options);
 		const data = await response.json();
 		const topRatedMovies = data
 			.sort((a, b) => b.averageRating - a.averageRating)
-			.slice(0, 10);
-		//---------------create movie card from api-----------
-		console.log(data.length);
+			.slice(0, 30);
+		console.log("movies length " + data.length);
 		console.log(data);
+		//---------------create movie card from api for top ten-----------
 		topRatedMovies.forEach((movie) => {
 			createMovieCard(
 				movie.primaryImage,
 				movie.title,
 				movie.averageRating,
 				movie.startYear,
-				movie.runtimeMinutes
+				movie.runtimeMinutes,
+				"#topTen"
+			);
+		});
+		//-----new realased movies--------------
+		const responseTvShow = await fetch(urlTvShows, options);
+		const tvShowData = await responseTvShow.json();
+		const topTvShows = tvShowData.sort((a, b) => b.averageRating - a.averageRating).slice(0, 30);
+		console.log(tvShowData);
+
+		topTvShows.forEach((tvShow) => {
+			createMovieCard(
+				tvShow.primaryImage,
+				tvShow.title,
+				tvShow.averageRating,
+				tvShow.startYear,
+				tvShow.runtimeMinutes,
+				"#topTvShows"
 			);
 		});
 	} catch (error) {
@@ -71,8 +90,8 @@ async function fetchData() {
 }
 
 //------------function create movie card----------------
-function createMovieCard(img, name, rating, year, runtime) {
-	const cardContainer = document.querySelector(".cardContainer");
+function createMovieCard(img, name, rating, year, runtime, container) {
+	const cardContainer = document.querySelector(container);
 	const movieCardHTML = `
         <div class="movieCard">
             <img

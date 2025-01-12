@@ -392,20 +392,27 @@
   }
 }
 .moviesLine {
-  margin: 100px 0px;
+  margin: 100px 0px 50px;
 }
 
 .moviesSection {
-  margin: 0px 20px 0px 20px;
+  display: grid;
+}
+.moviesSection h2 {
+  color: white;
+  font-family: sans-serif;
+  margin: 0px 0px 0px 25px;
+  padding: 0px;
 }
 .moviesSection .cardContainer {
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0) 3%, rgb(0, 0, 0) 97%, rgba(0, 0, 0, 0));
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(300px, 1fr);
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  gap: 15px;
-  padding: 20px 0px;
+  gap: 20px;
+  padding: 20px 20px;
 }
 .moviesSection .cardContainer .movieCard {
   border-radius: 20px;
@@ -413,6 +420,7 @@
   flex: 0 0 auto;
   background-color: #101827;
   transition: all 0.3s;
+  cursor: pointer;
 }
 .moviesSection .cardContainer .movieCard:hover {
   box-shadow: #ffb509 0px 0px 9px 4px;
