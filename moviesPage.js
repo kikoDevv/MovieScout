@@ -68,14 +68,14 @@ async function fetchData() {
 				"#topTen"
 			);
 		});
-		//-----new realased movies--------------
+		//---------get top tv shows----------------
 		const responseTvShow = await fetch(urlTvShows, options);
 		const tvShowData = await responseTvShow.json();
 		const topTvShows = tvShowData
 			.sort((a, b) => b.averageRating - a.averageRating)
 			.slice(0, 30);
 		console.log(tvShowData);
-
+		//--------------generate tv shows card----------------
 		topTvShows.forEach((tvShow) => {
 			createMovieCard(
 				tvShow.primaryImage,
@@ -86,6 +86,21 @@ async function fetchData() {
 				"#topTvShows"
 			);
 		});
+		//-----------get new release------------------
+		const newReleased = data
+			.sort((a, b) => b.startYear - a.startYear)
+			.slice(0, 30);
+		newReleased.forEach((newR) => {
+			createMovieCard(
+				newR.primaryImage,
+				newR.title,
+				newR.averageRating,
+				newR.startYear,
+				newR.runtime,
+				"#newReleased"
+			);
+		});
+		console.log(newReleased);
 	} catch (error) {
 		console.error(error);
 	}
@@ -94,26 +109,28 @@ async function fetchData() {
 //------------function create movie card----------------
 function createMovieCard(img, name, rating, year, runtime, container) {
 	const cardContainer = document.querySelector(container);
+	const fallbackImage = 'pics/imageNotFound.jpeg';
 	const movieCardHTML = `
         <div class="movieCard">
             <img
                 class="moviesImg"
                 src="${img}"
-                alt="movie image not found" />
+                alt="movie image not found"
+                onerror="this.onerror=null;this.src='${fallbackImage}';" />
             <div class="cardInfo">
                 <h3 class="moviesName">${name}</h3>
                 <div class="movieInfo">
                     <div class="rating">
                         <i class="fa-brands fa-imdb fa-1xl"></i>
-						<p class="ratingNumber">${rating}</p>
+                        <p class="ratingNumber">${rating}</p>
                     </div>
                     <div class="year">
                         <i class="fa-regular fa-calendar-plus"></i>
-						<p class="yearNumber">${year}</p>
+                        <p class="yearNumber">${year}</p>
                     </div>
                     <div class="runtime">
-                         <i class="fa-regular fa-hourglass-half"></i>
-						<p class="runtimeNumber">${runtime}M</p>
+                        <i class="fa-regular fa-hourglass-half"></i>
+                        <p class="runtimeNumber">${runtime} min</p>
                     </div>
                 </div>
                 <button class="buyBtn">Buy ticket</button>

@@ -342,7 +342,6 @@
 		user-select: none;
 		background-color: aliceblue;
 		animation: faideIn 0.3s ease-in-out;
-		// background-color:white;
 		.line {
 			margin-top: 30px;
 			margin-bottom: 30px;
@@ -427,7 +426,6 @@
 		opacity: 1;
 	}
 }
-//--------------filter menu neded---------------
 //--------------------movie cards---------------------
 .moviesLine {
 	margin: 100px 0px 50px;
@@ -455,6 +453,9 @@
 		scroll-snap-type: x mandatory;
 		gap: 20px;
 		padding: 20px 20px;
+		&::-webkit-scrollbar{
+			display: none;
+		}
 		.movieCard {
 			border-radius: 20px;
 			overflow: hidden;

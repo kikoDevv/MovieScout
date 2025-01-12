@@ -414,6 +414,9 @@
   gap: 20px;
   padding: 20px 20px;
 }
+.moviesSection .cardContainer::-webkit-scrollbar {
+  display: none;
+}
 .moviesSection .cardContainer .movieCard {
   border-radius: 20px;
   overflow: hidden;
