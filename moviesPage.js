@@ -80,7 +80,7 @@ function createMovieCard(img, name, rating, year, runtime) {
                 src="${img}"
                 alt="movie image not found" />
             <div class="cardInfo">
-                <h2 class="moviesName">${name}</h2>
+                <h3 class="moviesName">${name}</h3>
                 <div class="movieInfo">
                     <div class="rating">
                         <i class="fa-brands fa-imdb fa-1xl"></i>

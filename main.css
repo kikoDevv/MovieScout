@@ -396,7 +396,7 @@
 }
 
 .moviesSection {
-  padding: 0px 20px 0px 20px;
+  margin: 0px 20px 0px 20px;
 }
 .moviesSection .cardContainer {
   display: grid;
@@ -412,16 +412,18 @@
   overflow: hidden;
   flex: 0 0 auto;
   background-color: #101827;
+  transition: all 0.3s;
 }
 .moviesSection .cardContainer .movieCard:hover {
   box-shadow: #ffb509 0px 0px 9px 4px;
   scale: 1.03;
 }
 .moviesSection .cardContainer .movieCard .moviesImg {
-  height: 50vh;
+  height: 40vh;
   width: 100%;
 }
 .moviesSection .cardContainer .movieCard .cardInfo {
+  user-select: none;
   display: grid;
   padding: 10px;
   font-family: sans-serif;
@@ -431,6 +433,10 @@
   color: white;
   font-family: "Work Sans", sans-serif;
   place-self: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 98%;
 }
 .moviesSection .cardContainer .movieCard .cardInfo .movieInfo {
   display: flex;
