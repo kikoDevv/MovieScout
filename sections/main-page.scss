@@ -465,6 +465,11 @@
 			backdrop-filter: blur(20px);
 			transition: all 0.3s;
 			cursor: pointer;
+			opacity: 0; // Initially hidden
+			transform: translateY(20px); // Initial position for animation
+			&.in-view {
+				animation: fadeInUp 0.6s ease-out forwards; // Apply the animation
+			}
 			&:hover {
 				box-shadow: #ffb509 0px 0px 9px 4px;
 				scale: 1.03;
@@ -482,11 +487,9 @@
 					margin: 0px;
 					color: white;
 					font-family: "Work Sans", sans-serif;
-					place-self: center;
 					white-space: nowrap;
-					overflow: hidden;
+					overflow-x: hidden;
 					text-overflow: ellipsis;
-					max-width: 98%;
 				}
 				.movieInfo {
 					display: flex;
@@ -495,7 +498,6 @@
 					.rating {
 						display: flex;
 						padding: 0px;
-						// background-color:white;
 						align-items: center;
 						i {
 							color: yellow;
@@ -534,7 +536,7 @@
 				.buyBtn {
 					margin-top: 10px;
 					max-width: fit-content;
-					place-self: center;
+					align-self: center; // Center the button horizontally
 					padding: 10px 20px;
 					border: none;
 					border-radius: 10px;
@@ -639,6 +641,17 @@
 	}
 }
 
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
 #moviesPageBody {
 	// margin-bottom: 800px;
 	// background-color: #2d2d2dca;
@@ -646,7 +659,6 @@
 	// font-family: "Work Sans", sans-serif;
 	// background-color: rgba(0, 0, 0, 0.725);
 	// backdrop-filter: blur(20px);
-
 }
 body {
 	margin: 0;
