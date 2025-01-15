@@ -426,6 +426,11 @@
   backdrop-filter: blur(20px);
   transition: all 0.3s;
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.moviesSection .cardContainer .movieCard.in-view {
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 .moviesSection .cardContainer .movieCard:hover {
   box-shadow: #ffb509 0px 0px 9px 4px;
@@ -445,11 +450,9 @@
   margin: 0px;
   color: white;
   font-family: "Work Sans", sans-serif;
-  place-self: center;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
-  max-width: 98%;
 }
 .moviesSection .cardContainer .movieCard .cardInfo .movieInfo {
   display: flex;
@@ -496,7 +499,7 @@
 .moviesSection .cardContainer .movieCard .cardInfo .buyBtn {
   margin-top: 10px;
   max-width: fit-content;
-  place-self: center;
+  align-self: center;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
@@ -581,6 +584,16 @@
   }
   100% {
     background-position: 0 50%;
+  }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 #moviesPageBody {
