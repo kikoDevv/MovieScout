@@ -23,4 +23,12 @@ Welcome to **Kino Cinema** – a sleek and responsive web app for discovering mo
 - **Search Function:** Quickly search for your favorite titles by name.
 - **Filter Functionality:** Filter results by genre, year, and more to easily find movies and TV shows that fit your preferences.
 - **Reliable Data:** All movie data is sourced directly from the **IMDb API**, ensuring accuracy and credibility.
+📸 Screenshots:
+https://github.com/user-attachments/assets/9a560fe9-88a7-405f-a6c7-20f8be2d0198
 
+📫 Contact:
+	•	Email: kiko.devv@gmail.com
+	•	GitHub: github.com/kiko.devv
+
+🙏 Acknowledgments:
+Thanks to IMDb API for providing accurate and reliable movie data, which makes this project possible!
