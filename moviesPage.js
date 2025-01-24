@@ -55,13 +55,12 @@ async function fetchData() {
 		const topRatedMovies = data
 			.sort((a, b) => b.averageRating - a.averageRating)
 			.slice(0, 30);
-		console.log("movies length " + data.length);
 		console.log(data);
 		//---------------create movie card from api for top ten-----------
 		topRatedMovies.forEach((movie) => {
 			createMovieCard(
 				movie.primaryImage,
-				movie.title,
+				movie.originalTitle,
 				movie.averageRating,
 				movie.startYear,
 				movie.runtimeMinutes,
@@ -79,7 +78,7 @@ async function fetchData() {
 		topTvShows.forEach((tvShow) => {
 			createMovieCard(
 				tvShow.primaryImage,
-				tvShow.title,
+				tvShow.originalTitle,
 				tvShow.averageRating,
 				tvShow.startYear,
 				tvShow.runtimeMinutes,
@@ -93,7 +92,7 @@ async function fetchData() {
 		newReleased.forEach((newR) => {
 			createMovieCard(
 				newR.primaryImage,
-				newR.title,
+				newR.originalTitle,
 				newR.averageRating,
 				newR.startYear,
 				newR.runtime,
@@ -109,7 +108,9 @@ async function fetchData() {
 //------------function create movie card----------------
 function createMovieCard(img, name, rating, year, runtime, container) {
 	const cardContainer = document.querySelector(container);
-	const fallbackImage = 'pics/imageNotFound.jpeg';
+	const fallbackImage = 'pics/notFound.jpeg';
+	const fallbackName = 'Shitt, 404!';
+	const fallback = '404!';
 	const movieCardHTML = `
         <div class="movieCard">
             <img
@@ -118,19 +119,19 @@ function createMovieCard(img, name, rating, year, runtime, container) {
                 alt="movie image not found"
                 onerror="this.onerror=null;this.src='${fallbackImage}';" />
             <div class="cardInfo">
-                <h3 class="moviesName">${name}</h3>
+                <h3 class="moviesName">${name || fallbackName}</h3>
                 <div class="movieInfo">
                     <div class="rating">
                         <i class="fa-brands fa-imdb fa-1xl"></i>
-                        <p class="ratingNumber">${rating}</p>
+                        <p class="ratingNumber">${rating || fallback}</p>
                     </div>
                     <div class="year">
                         <i class="fa-regular fa-calendar-plus"></i>
-                        <p class="yearNumber">${year}</p>
+                        <p class="yearNumber">${year || fallback}</p>
                     </div>
                     <div class="runtime">
                         <i class="fa-regular fa-hourglass-half"></i>
-                        <p class="runtimeNumber">${runtime} min</p>
+                        <p class="runtimeNumber">${runtime || fallback} min</p>
                     </div>
                 </div>
                 <button class="buyBtn">Buy ticket</button>
