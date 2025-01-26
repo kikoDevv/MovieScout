@@ -1,5 +1,8 @@
 {
-  "dependencies": {
-    "dotenv": "^16.4.7"
-  }
+	"dependencies": {
+		"dotenv": "^16.4.7"
+	},
+	"scripts": {
+		"sass": "sass --watch src/styles/root.scss:src/styles/main.css"
+	}
 }
