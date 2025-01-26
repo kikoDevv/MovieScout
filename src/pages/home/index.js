@@ -108,9 +108,9 @@ async function fetchData() {
 //------------function create movie card----------------
 function createMovieCard(img, name, rating, year, runtime, container) {
 	const cardContainer = document.querySelector(container);
-	const fallbackImage = '/src/pics/notFound.jpeg';
-	const fallbackName = 'Shitt, 404!';
-	const fallback = '404!';
+	const fallbackImage = "src/pics/notFound.jpeg";
+	const fallbackName = "Shitt, 404!";
+	const fallback = "404!";
 	const movieCardHTML = `
         <div class="movieCard">
             <img
