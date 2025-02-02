@@ -485,6 +485,7 @@
 					white-space: nowrap;
 					overflow-x: hidden;
 					text-overflow: ellipsis;
+					place-self: center;
 				}
 				.movieInfo {
 					display: flex;
@@ -531,7 +532,7 @@
 				.buyBtn {
 					margin-top: 10px;
 					max-width: fit-content;
-					align-self: center; // Center the button horizontally
+					place-self: center;
 					padding: 10px 20px;
 					border: none;
 					border-radius: 10px;

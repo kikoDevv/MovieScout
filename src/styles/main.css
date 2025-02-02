@@ -448,6 +448,7 @@
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
+  place-self: center;
 }
 .moviesSection .cardContainer .movieCard .cardInfo .movieInfo {
   display: flex;
@@ -494,7 +495,7 @@
 .moviesSection .cardContainer .movieCard .cardInfo .buyBtn {
   margin-top: 10px;
   max-width: fit-content;
-  align-self: center;
+  place-self: center;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;

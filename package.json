@@ -1,8 +1,9 @@
 {
-	"dependencies": {
-		"dotenv": "^16.4.7"
-	},
 	"scripts": {
 		"sass": "sass --watch src/styles/root.scss:src/styles/main.css"
+	},
+	"devDependencies": {
+		"dotenv": "^16.4.7",
+		"dotenv-webpack": "^8.1.0"
 	}
 }

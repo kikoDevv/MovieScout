@@ -1,0 +1,10 @@
+.movieCard{
+    // opacity: 0;
+    transform: translateX(700px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  .movieCard.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
