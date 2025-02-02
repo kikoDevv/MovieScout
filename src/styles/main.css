@@ -299,6 +299,10 @@
   color: white;
 }
 .filterSection .filterMenu {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: transform 1s, opacity 1s;
   display: grid;
   place-self: center;
   padding: 50px;
@@ -307,7 +311,6 @@
   user-select: none;
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(20px);
-  animation: faideIn 0.3s ease-in-out;
 }
 .filterSection .filterMenu .line {
   margin-top: 30px;
@@ -377,21 +380,12 @@
   background-color: #ffb509;
   color: white;
 }
-
-@keyframes faideIn {
-  0% {
-    scale: 0.5;
-    opacity: 0;
-  }
-  80% {
-    opacity: 1;
-    scale: 1.1;
-  }
-  to {
-    scale: 1;
-    opacity: 1;
-  }
+.filterSection .filterMenu.animat {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0px);
 }
+
 .moviesLine {
   margin: 100px 0px 50px;
 }
@@ -406,6 +400,10 @@
   padding: 0px;
 }
 .moviesSection .cardContainer {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(200px);
+  transition: transform 1s, opacity 1s;
   mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0) 3%, rgb(0, 0, 0) 97%, rgba(0, 0, 0, 0));
   display: grid;
   grid-auto-flow: column;
@@ -424,7 +422,6 @@
   flex: 0 0 auto;
   background-color: rgba(86, 79, 79, 0.3);
   backdrop-filter: blur(20px);
-  transition: all 0.3s;
   cursor: pointer;
 }
 .moviesSection .cardContainer .movieCard:hover {
@@ -507,6 +504,11 @@
 .moviesSection .cardContainer .movieCard .cardInfo .buyBtn:hover {
   background-color: #ffb509;
   color: white;
+}
+.moviesSection .cardContainer.load {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0px);
 }
 
 .footer {

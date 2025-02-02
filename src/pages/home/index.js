@@ -1,3 +1,5 @@
+import {lazyloadMovies} from "./scrollTiming.js";
+
 document.addEventListener("DOMContentLoaded", () => {
 	const filterBtn = document.querySelector(".filterBtn");
 	const filterMenu = document.querySelector(".filterMenu");
@@ -55,7 +57,6 @@ async function fetchData() {
 		const topRatedMovies = data
 			.sort((a, b) => b.averageRating - a.averageRating)
 			.slice(0, 30);
-		console.log(data);
 		//---------------create movie card from api for top ten-----------
 		topRatedMovies.forEach((movie) => {
 			createMovieCard(
@@ -73,7 +74,6 @@ async function fetchData() {
 		const topTvShows = tvShowData
 			.sort((a, b) => b.averageRating - a.averageRating)
 			.slice(0, 30);
-		console.log(tvShowData);
 		//--------------generate tv shows card----------------
 		topTvShows.forEach((tvShow) => {
 			createMovieCard(
@@ -99,7 +99,6 @@ async function fetchData() {
 				"#newReleased"
 			);
 		});
-		console.log(newReleased);
 	} catch (error) {
 		console.error(error);
 	}
@@ -135,9 +134,10 @@ function createMovieCard(img, name, rating, year, runtime, container) {
                         <p class="runtimeNumber">${runtime || fallback} min</p>
                     </div>
                 </div>
-                <button class="buyBtn">Buy ticket</button>
+                <button class="buyBtn">+ whatch list</button>
             </div>
         </div>
     `;
 	cardContainer.innerHTML += movieCardHTML;
 }
+lazyloadMovies();
