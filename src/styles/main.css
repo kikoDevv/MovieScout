@@ -392,6 +392,7 @@
 
 .moviesSection {
   display: grid;
+  overflow-x: hidden;
 }
 .moviesSection h2 {
   color: white;

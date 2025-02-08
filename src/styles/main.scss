@@ -427,6 +427,7 @@
 }
 .moviesSection {
 	display: grid;
+	overflow-x: hidden;
 	h2 {
 		color: white;
 		font-family: sans-serif;
