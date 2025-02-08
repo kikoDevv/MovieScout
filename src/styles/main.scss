@@ -89,6 +89,13 @@
 		left: 0;
 		top: 0px;
 	}
+	.sentinel{
+		position: absolute;
+		z-index: 1000;
+		top: 43%;
+		left: 48%;
+		transform: translateX(-50%);
+	}
 	.searchSection {
 		display: flex;
 		position: absolute;
@@ -131,6 +138,13 @@
 				background-color: #ffb509;
 				color: white;
 			}
+		}
+		&.scrolled {
+			position: fixed;
+			z-index: 1000;
+			top: 1%;
+			left: 48%;
+			transform: translateX(-50%);
 		}
 	}
 }

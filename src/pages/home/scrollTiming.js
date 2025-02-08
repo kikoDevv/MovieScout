@@ -7,7 +7,7 @@ export function filterMenuAnimation() {
 	});
 	observer.observe(filterMenu);
 }
-
+//----------------funtion to play animation when movieCards comming to view------------
 export function lazyloadMovies() {
 	// Select ALL card containers
 	const movieCards = document.querySelectorAll(".cardContainer");
@@ -37,3 +37,23 @@ export function lazyloadMovies() {
 		}
 	});
 }
+//------------function to put search par on top when scrolling----------
+export function searchBarSticky() {
+	const searchBar = document.querySelector(".searchSection");
+	const seatImg = document.querySelector(".sentinel");
+	const observer = new IntersectionObserver(
+	  ([entry]) => {
+		if (!entry.isIntersecting) {
+		  searchBar.classList.add("scrolled");
+		} else {
+		  searchBar.classList.remove("scrolled");
+		}
+	  },
+	  {
+		root: null,
+		threshold: 0,
+		rootMargin: "10px",
+	  }
+	);
+	observer.observe(seatImg);
+  }
