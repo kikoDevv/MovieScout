@@ -461,6 +461,7 @@
 			flex: 0 0 auto;
 			background-color: rgba(86, 79, 79, 0.3);
 			backdrop-filter: blur(20px);
+			transition: ease-in-out 0.2s;
 			cursor: pointer;
 			&:hover {
 				box-shadow: #ffb509 0px 0px 9px 4px;

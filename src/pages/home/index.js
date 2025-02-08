@@ -140,4 +140,3 @@ function createMovieCard(img, name, rating, year, runtime, container) {
     `;
 	cardContainer.innerHTML += movieCardHTML;
 }
-lazyloadMovies();

@@ -422,6 +422,7 @@
   flex: 0 0 auto;
   background-color: rgba(86, 79, 79, 0.3);
   backdrop-filter: blur(20px);
+  transition: ease-in-out 0.2s;
   cursor: pointer;
 }
 .moviesSection .cardContainer .movieCard:hover {
@@ -617,6 +618,7 @@ body {
   left: 0;
   width: 100%;
   height: 100px;
+  background: url("/src/pics/wave.png");
   background: url("../pics/wave.png");
   background-size: 1000px 100px;
 }
@@ -735,6 +737,190 @@ body {
   }
   100% {
     background-position-x: 1000px;
+  }
+}
+#contact-page-body {
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to top, white 50%, blue 50%);
+}
+
+.mainSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  box-shadow: #101827 0px 0px 4px 0.08px;
+}
+.mainSection .container-right {
+  background: conic-gradient(at top right, lightcyan, lightblue);
+  height: 70vh;
+  width: 40vw;
+  border-radius: 0px 30px 30px 0px;
+}
+.mainSection .container-right .input-forms {
+  display: grid;
+  padding: 20px 50px 0px 50px;
+  gap: 20px;
+}
+.mainSection .container-right .input-forms .name-form {
+  position: relative;
+}
+.mainSection .container-right .input-forms .name-form .label-input-name {
+  position: absolute;
+  top: 45%;
+  left: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.3s;
+  padding: 0px 5px;
+}
+.mainSection .container-right .input-forms .name-form .input-name {
+  padding: 10px;
+  border-radius: 10px;
+  border-width: 2px;
+  border: solid black;
+  outline: none;
+  min-width: 90%;
+}
+.mainSection .container-right .input-forms .name-form .input-name:not(:placeholder-shown) + .label-input-name {
+  top: 0;
+  left: 15px;
+  font-size: 0.8em;
+  background: linear-gradient(to top, white 50%, #bce3ed 50%);
+}
+.mainSection .container-right .input-forms .name-form .input-name:focus ~ .label-input-name {
+  top: 0;
+  left: 15px;
+  background: linear-gradient(to top, white 50%, #bce3ed 50%);
+}
+.mainSection .container-right .input-forms .email-form {
+  position: relative;
+}
+.mainSection .container-right .input-forms .email-form .label-email {
+  position: absolute;
+  top: 45%;
+  left: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.3s;
+  padding: 0px 5px;
+}
+.mainSection .container-right .input-forms .email-form .input-email {
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 90%;
+  outline: none;
+  border-width: 2px;
+  border: solid black;
+}
+.mainSection .container-right .input-forms .email-form .input-email:focus ~ .label-email {
+  top: 0;
+  left: 15px;
+  background: linear-gradient(to top, white 50%, #bce3ed 50%);
+}
+.mainSection .container-right .input-forms .email-form .input-email:not(:placeholder-shown) + .label-email {
+  top: 0;
+  left: 15;
+  font-size: 0.8em;
+  background: linear-gradient(to top, white 50%, #bce3ed 50%);
+}
+.mainSection .container-right .input-forms .number-form {
+  position: relative;
+}
+.mainSection .container-right .input-forms .number-form .label-number {
+  position: absolute;
+  top: 45%;
+  left: 15px;
+  pointer-events: none;
+  transform: translateY(-45%);
+  transition: 0.3s;
+  padding: 0px 5px;
+}
+.mainSection .container-right .input-forms .number-form .input-number {
+  padding: 10px;
+  min-width: 90%;
+  border-width: 2px;
+  border: solid black;
+  outline: none;
+  border-radius: 10px;
+}
+.mainSection .container-right .input-forms .number-form .input-number:focus ~ .label-number {
+  top: 0;
+  left: 15px;
+  background: linear-gradient(to top, white 50%, #bce3ed 50%);
+}
+.mainSection .container-right .input-forms .number-form .input-number:not(:placeholder-shown) + .label-number {
+  top: 0;
+  left: 15px;
+  font-size: 0.8em;
+  background: linear-gradient(to top, white 50%, #bce3ed 50%);
+}
+.mainSection .container-right .input-forms .message-form {
+  display: grid;
+  padding-right: 15px;
+}
+.mainSection .container-right .input-forms .message-form .input-message {
+  max-width: 94%;
+  min-height: 100px;
+  border-radius: 5px;
+  border-width: 2px;
+  border: solid black;
+  padding: 10px;
+}
+.mainSection .container-right .input-forms .submit-btn {
+  max-width: fit-content;
+  place-self: center;
+  padding: 10px 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: azure;
+  box-shadow: #101827 0px 0px 4px 0.08px;
+}
+.mainSection .container-right .input-forms .submit-btn:hover {
+  background-color: blueviolet;
+  color: white;
+}
+.mainSection .container-right .input-forms .lorem {
+  display: flex;
+  justify-content: space-between;
+}
+.mainSection .container-right .input-forms .lorem div {
+  display: flex;
+}
+.mainSection .container-right .input-forms .lorem div p {
+  margin: 0px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+.mainSection .container-left {
+  display: flex;
+  justify-content: center;
+  background-color: blueviolet;
+  height: 70vh;
+  width: 25vw;
+  border-radius: 30px 0px 0px 30px;
+  overflow: hidden;
+}
+.mainSection .container-left .phone-img {
+  border-radius: 0px;
+  animation: hanging 3s infinite ease-in-out;
+  transform-origin: top center;
+}
+
+@keyframes hanging {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-100px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(-100px) rotate(0deg);
   }
 }
 
