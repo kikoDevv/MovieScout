@@ -66,7 +66,7 @@
   z-index: -1;
 }
 .header .nav-title-container .navbar-container a:hover::before {
-  transform: scaleY(1);
+  transform: scaleY(2);
   opacity: 1;
 }
 
