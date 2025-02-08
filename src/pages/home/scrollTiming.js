@@ -5,10 +5,8 @@ const observer = new IntersectionObserver((entries) => {
         entry.target.classList.toggle("animat", entry.isIntersecting);
     });
 });
-
 observer.observe(filterMenu);
 
-lazyloadMovies();
 export function lazyloadMovies() {
     // Select ALL card containers
     const movieCards = document.querySelectorAll(".cardContainer");
