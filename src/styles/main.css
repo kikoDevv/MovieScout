@@ -113,6 +113,11 @@
 .upperSection .searchSection .searchBar:focus {
   outline: none;
 }
+.upperSection .searchSection .searchBar::placeholder {
+  color: rgba(0, 0, 0, 0.527);
+  font-weight: bold;
+  padding-left: 10px;
+}
 .upperSection .searchSection .searchBtn {
   padding: 10px 20px;
   border: none;

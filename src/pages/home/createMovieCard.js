@@ -1,7 +1,7 @@
 //------------function create movie card----------------
 export function createMovieCard(img, name, rating, year, runtime, container) {
     const cardContainer = document.querySelector(container);
-    const fallbackImage = "/MovieScout/pics/notFound.jpeg";
+    const fallbackImage = "/MovieScout/src/pics/notFound.jpeg";
     const fallbackName = "Shitt, 404!";
     const fallback = "404!";
     const movieCardHTML = `

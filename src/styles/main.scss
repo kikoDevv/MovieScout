@@ -89,7 +89,7 @@
 		left: 0;
 		top: 0px;
 	}
-	.sentinel{
+	.sentinel {
 		position: absolute;
 		z-index: 1000;
 		top: 43%;
@@ -120,6 +120,11 @@
 
 			&:focus {
 				outline: none;
+			}
+			&::placeholder {
+				color: rgba(0, 0, 0, 0.527);
+				font-weight: bold;
+				padding-left: 10px;
 			}
 		}
 		.searchBtn {
