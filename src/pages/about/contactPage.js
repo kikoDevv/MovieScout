@@ -3,6 +3,6 @@ onSubmitBackToHome();
 function onSubmitBackToHome() {
 	const submitBtn = document.querySelector(".submit-btn");
 	submitBtn.addEventListener("click", () => {
-		window.location.href = "/index.html";
+		window.location.href = "/MovieScout/index.html";
 	});
 }
