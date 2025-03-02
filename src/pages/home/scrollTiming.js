@@ -1,12 +1,4 @@
-export function filterMenuAnimation() {
-	const filterMenu = document.querySelector(".filterMenu");
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			entry.target.classList.toggle("animat", entry.isIntersecting);
-		});
-	});
-	observer.observe(filterMenu);
-}
+
 //----------------funtion to play animation when movieCards comming to view------------
 export function lazyloadMovies() {
 	// Select ALL card containers

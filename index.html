@@ -128,67 +128,75 @@
 				</ul>
 			</section>
 			<!----------------filter section-------------->
+			<div class="decoy">
+				<button class="filterBtn">Filter Movies</button>
+			</div>
 			<section class="filterSection">
-				<button class="filterBtn fa-solid fa-xmark fa-2xl"></button>
-				<div class="filterMenu">
-					<p>Filter by genres</p>
-					<div class="tagsContainer">
-						<button class="tags drama">Drama</button>
-						<button class="tags adventure">Adventure</button>
-						<button class="tags crime">Crime</button>
-						<button class="tags action">Action</button>
-						<button class="tags Comedy">Comedy</button>
-						<button class="tags sci">Sci-Fi</button>
-						<button class="tags fantacy">Fantacy</button>
-						<button class="tags kids">Kids</button>
+				<div class="containerHead">
+					<p><b>Filter Movies</b></p>
+					<hr>
+				</div>
+				<div class="filterContainer">
+					<div class="containerLeft">
+						<p><b>By type</b></p>
+						<div class="checkBoxs">
+							<div>
+								<input id="includeOnline" type="checkbox" />
+								<label for="includeOnline">Include only Movies</label>
+							</div>
+							<div>
+								<input id="includeOnsite" type="checkbox" />
+								<label for="includeOnsite"> Include only TV shows </label>
+							</div>
+						</div>
 					</div>
-					<hr class="line" />
-					<p>Filter by released year</p>
-					<section class="filterByInputSection">
-						<form class="containerLeft">
-							<input
-								class="input releaseYfrom"
-								type="number"
-								min="1900"
-								max="2025"
-								placeholder="Release year from"
-							/>
+					<div class="containerMiddle">
+						<p><b>By rating</b></p>
+						<div class="starsContainer">
+							<!--TEMP CODE! This section must be generated dynamic in js-->
+							<div class="stars-container-left">
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+							</div>
 							<p>To</p>
-							<input
-								class="input releaseYto"
-								type="number"
-								min="1900"
-								max="2025"
-								placeholder="Release year to"
-							/>
-						</form>
-						<form class="containerRight">
-							<input
-								class="input ratingFrom"
-								type="number"
-								step="0.1"
-								min="1"
-								max="10"
-								placeholder="Rating from"
-							/>
-							<p>To</p>
-							<input
-								class="input ratingTo"
-								type="number"
-								step="0.1"
-								min="1"
-								max="10"
-								placeholder="Rating to"
-							/>
-						</form>
-					</section>
-					<hr class="line" />
-					<button class="submitBtn">Submit Filter</button>
+							<div class="stars-container-right">
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+							</div>
+							<!--------------->
+						</div>
+						<p class="inputTitle">Or type to search for keyword</p>
+						<input
+							class="filterInput"
+							type="text"
+							placeholder="Start typing to filter"
+						/>
+					</div>
+					<div class="containerRight">
+						<p><b>By tags</b></p>
+						<div class="tagsContainer">
+							<button class="#">Movies</button>
+							<button class="#">TV Series</button>
+							<button class="#">Action</button>
+							<button class="#">Adventur</button>
+							<button class="#">Animation</button>
+							<button class="#">Sci-Fi</button>
+							<button class="#">Comedy</button>
+							<button class="#">Horror</button>
+							<button class="#">Drama</button>
+						</div>
+					</div>
 				</div>
 			</section>
+			<hr class="line">
 			<!-------------------movie section---------------->
 			<section class="moviesSection">
-				<hr class="moviesLine" />
 				<h2>Most popular movies ></h2>
 				<div class="cardContainer" id="topTen"></div>
 				<h2>Most popular TV shows ></h2>
