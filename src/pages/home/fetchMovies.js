@@ -1,4 +1,13 @@
 import { createMovieCard } from "./createMovieCard.js";
+
+function shuffleArray(array) {
+	for (let i = array.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+	}
+	return array;
+}
+
 //----------function to fetch data from api-------
 export async function fetchData() {
 	const urlMoves = "https://imdb236.p.rapidapi.com/imdb/most-popular-movies";
@@ -14,11 +23,12 @@ export async function fetchData() {
 		//---------------get top movies--------------
 		const response = await fetch(urlMoves, options);
 		const data = await response.json();
-		const topRatedMovies = data
-			.sort((a, b) => b.averageRating - a.averageRating)
-			.slice(0, 30);
-		//---------------create movie card from api for top ten-----------
-		topRatedMovies.forEach((movie) => {
+		const topRatedMovies = data.sort(
+			(a, b) => b.averageRating - a.averageRating
+		);
+		const random30Movies = shuffleArray(topRatedMovies).slice(0, 30);
+		//---------------create movie cards from random 30 movies-----------
+		random30Movies.forEach((movie) => {
 			createMovieCard(
 				movie.primaryImage,
 				movie.originalTitle,
@@ -34,7 +44,7 @@ export async function fetchData() {
 		const topTvShows = tvShowData
 			.sort((a, b) => b.averageRating - a.averageRating)
 			.slice(0, 30);
-		//--------------generate tv shows card----------------
+		//--------------generate tv shows cards----------------
 		topTvShows.forEach((tvShow) => {
 			createMovieCard(
 				tvShow.primaryImage,
@@ -45,7 +55,7 @@ export async function fetchData() {
 				"#topTvShows"
 			);
 		});
-		//-----------get new release------------------
+		//-----------get new release movies------------------
 		const newReleased = data
 			.sort((a, b) => b.startYear - a.startYear)
 			.slice(0, 30);

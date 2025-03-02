@@ -625,6 +625,9 @@ body {
   font-size: 1.5em;
   padding: 0px 1em;
 }
+.footer .links-container li a:hover {
+  color: darkgray;
+}
 .footer .copyright-container p {
   text-align: center;
   color: white;
