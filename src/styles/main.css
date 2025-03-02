@@ -990,5 +990,27 @@ body {
     scale: 1;
   }
 }
+.main-cont {
+  background-color: red;
+  height: 100vh;
+  display: grid;
+}
+.main-cont .detail-modal {
+  display: grid;
+  background-color: yellow;
+}
+.main-cont .detail-modal .upper-box {
+  display: flex;
+  width: 80vw;
+  height: 90vh;
+  overflow: hidden;
+  border-radius: 20px;
+  justify-self: center;
+  align-self: center;
+}
+.main-cont .detail-modal .upper-box #trailerFrame {
+  width: 100%;
+  height: 100%;
+}
 
 /*# sourceMappingURL=main.css.map */
