@@ -1,23 +1,39 @@
-findTrailer("sonic 3");
-//-----------funtions-----------
+findTrailer("sonic");
+
 function findTrailer(movieTitle) {
-    document.addEventListener("DOMContentLoaded", async () => {
-        //-----movie title for the trailer search--------
-        const query = encodeURIComponent(movieTitle + " official trailer");
-        const apiKey = "AIzaSyDpo2qTuH8NmTPv-mIdPxy26WjAHNjruG4";
-        const apiURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=1&key=${apiKey}`;
-        try {
-            const response = await fetch(apiURL);
-            const data = await response.json();
-            if (data.items && data.items.length > 0) {
-                const videoId = data.items[0].id.videoId;
-                document.getElementById("trailerFrame").src =
-                    "https://www.youtube.com/embed/" + videoId;
-            } else {
-                console.error("No trailer found.");
-            }
-        } catch (error) {
-            console.error("Error fetching trailer:", error);
-        }
-    });
-};
+	document.addEventListener("DOMContentLoaded", async () => {
+		// TMDb API key
+		const tmdbKey = "7ae0a5d36394abcbfe893ebb3cd504f9";
+		try {
+			// Search for the movie to get its id
+			const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${tmdbKey}&query=${encodeURIComponent(
+				movieTitle
+			)}`;
+			const searchResponse = await fetch(searchURL);
+			const searchData = await searchResponse.json();
+			if (!(searchData.results && searchData.results.length > 0)) {
+				return console.error("No movie found.");
+			}
+			const movieId = searchData.results[0].id;
+
+			// Get movie videos using movie id
+			const videoURL = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${tmdbKey}`;
+			const videoResponse = await fetch(videoURL);
+			const videoData = await videoResponse.json();
+			if (videoData.results && videoData.results.length > 0) {
+				// Filter for YouTube trailer
+				const trailer = videoData.results.find(
+					(video) => video.site === "YouTube" && video.type === "Trailer"
+				);
+				if (trailer) {
+					document.getElementById("trailerFrame").src =
+						"https://www.youtube.com/embed/" + trailer.key;
+					return;
+				}
+			}
+			console.error("No trailer found.");
+		} catch (error) {
+			console.error("Error fetching trailer:", error);
+		}
+	});
+}
