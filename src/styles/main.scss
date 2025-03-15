@@ -1,3 +1,9 @@
+//-------------removes scrollbar from right side of the web-----
+html, body {
+	scrollbar-width: none;
+	margin: 0;
+	padding: 0;
+  }
 //--------------header----------------------
 .header {
 	display: grid;

@@ -4,20 +4,24 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Details</title>
-        <link rel="stylesheet" href="../../styles/main.css">
+		<link rel="stylesheet" href="../../styles/main.css" />
 	</head>
 	<body>
-        <div class="main-cont">
-            <div class="detail-modal">
-                <div class="upper-box">
-                    <img class="movieCover" src="/src/pics/14.jpeg" alt="Movie Cover" />
-                    <iframe id="trailerFrame"> </iframe>
-                </div>
-                <div class="lower-box">
-                    <button>Home now</button>
-                </div>
-            </div>
-        </div>
+		<div class="main-cont">
+			<div class="detail-modal">
+				<div class="left-box">
+					<img class="movieCover" src="/src/pics/14.jpeg" alt="Movie Cover" />
+				</div>
+				<div class="right-box">
+					<iframe id="trailerFrame"> </iframe>
+					<div class="info-box"></div>
+					<div class="btns-box">
+						<button class="homeBtn">Back to home</button>
+						<button class="watchListBtn">Add to watch list</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="./trailerFinder.js"></script>
 	</body>
 </html>

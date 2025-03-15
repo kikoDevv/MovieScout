@@ -1,28 +1,42 @@
 .main-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: red;
     height: 100vh;
-    display: grid;
     .detail-modal{
-        display: grid;
+        display: flex;
         background-color: yellow;
-        .upper-box{
-            display: flex;
-            width: 80vw;
-            height: 90vh;
-            overflow: hidden;
-            border-radius: 20px;
-            justify-self: center;
-            align-self: center;
-            #trailerFrame{
-                width: 100%;
-                height: 100%;
-            }
+        width: 90vw;
+        height: fit-content;
+        overflow: hidden;
+        border-radius: 20px;
+        .left-box{
             .movieCover{
-
+                height: 90vh;
+                width: 34vw;
             }
         }
-        .lower-box{
-
+        .right-box{
+            display: grid;
+            width: 100%;
+            #trailerFrame{
+                width: 100%;
+                height: 55vh;
+            }
+            .info-box{
+                display: grid;
+            }
+            .btns-box{
+                display: flex;
+                justify-content: center;
+                align-items: end;
+                margin-bottom: 20px;
+                button{
+                    max-width: fit-content;
+                    max-height: fit-content;
+                }
+            }
         }
     }
 }
