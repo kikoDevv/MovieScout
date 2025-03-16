@@ -583,7 +583,7 @@ body {
 		visibility: hidden;
 		opacity: 0;
 		transform: translateX(200px);
-		transition: transform 1s, opacity 1s;
+		transition: transform 0.8s, opacity 0.8s;
 		mask-image: linear-gradient(
 			to right,
 			rgb(0, 0, 0, 0),
@@ -598,6 +598,9 @@ body {
 		scroll-snap-type: x mandatory;
 		gap: 20px;
 		padding: 20px 20px;
+		will-change: transform, opacity;
+		content-visibility: auto;
+		contain: layout style paint;
 		&::-webkit-scrollbar {
 			display: none;
 		}
@@ -608,15 +611,20 @@ body {
 			flex: 0 0 auto;
 			background-color: rgba(86, 79, 79, 0.3);
 			backdrop-filter: blur(20px);
-			transition: ease-in-out 0.2s;
+			transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 			cursor: pointer;
+			contain: content;
 			&:hover {
 				box-shadow: #ffb509 0px 0px 9px 4px;
-				scale: 1.03;
+				transform: scale(1.03);
 			}
 			.moviesImg {
 				height: 40vh;
 				width: 100%;
+				object-fit: cover;
+				will-change: transform;
+				contain: strict;
+				content-visibility: auto;
 			}
 			.cardInfo {
 				user-select: none;

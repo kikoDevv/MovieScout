@@ -20,9 +20,21 @@ function initPagination() {
 		}
 	});
 }
-function setupPagination(container) {
+function setupPagination(container, retryCount = 0) {
+	const maxRetries = 10;
+
 	if (!container.classList.contains("load")) {
-		setTimeout(() => setupPagination(container), 500);
+		if (retryCount < maxRetries) {
+			const delay = Math.min(500 * Math.pow(1.5, retryCount), 5000);
+			setTimeout(() => setupPagination(container, retryCount + 1), delay);
+			console.log(
+				`Pagination retry ${retryCount + 1} for ${container.id} in ${delay}ms`
+			);
+		} else {
+			console.warn(
+				`Failed to initialize pagination for ${container.id} after ${maxRetries} attempts`
+			);
+		}
 		return;
 	}
 
@@ -143,7 +155,7 @@ function setupPagination(container) {
 		}
 	});
 
-	// Add keyboard navigation
+	//-----------Add keyboard navigation--------------------
 	paginationContainer.addEventListener("keydown", (e) => {
 		// Prevent action if scrolling is in progress
 		if (paginationContainer.dataset.scrolling === "true") {

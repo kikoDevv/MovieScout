@@ -8,6 +8,70 @@ function shuffleArray(array) {
 	return array;
 }
 
+// Helper function to render movie cards in batches
+function renderMovieCards(movies, containerId, batchSize = 5) {
+	const container = document.querySelector(containerId);
+
+	// Clear any existing content
+	container.innerHTML = "";
+
+	// Create a document fragment to batch DOM operations
+	const fragment = document.createDocumentFragment();
+
+	// Function to render a batch of movies
+	const renderBatch = (startIndex) => {
+		const endIndex = Math.min(startIndex + batchSize, movies.length);
+
+		for (let i = startIndex; i < endIndex; i++) {
+			const movie = movies[i];
+			const card = document.createElement("div");
+			card.className = "movieCard";
+			card.innerHTML = `
+				<img
+					class="moviesImg"
+					src="${movie.primaryImage}"
+					alt="movie image not found"
+					loading="lazy"
+					decoding="async"
+					fetchpriority="low"
+					onerror="this.onerror=null;this.src='/MovieScout/src/pics/notFound.jpeg';" />
+				<div class="cardInfo">
+					<h3 class="moviesName">${movie.originalTitle || "Shitt, 404!"}</h3>
+					<div class="movieInfo">
+						<div class="rating">
+							<i class="fa-brands fa-imdb fa-1xl"></i>
+							<p class="ratingNumber">${movie.averageRating || "404!"}</p>
+						</div>
+						<div class="year">
+							<i class="fa-regular fa-calendar-plus"></i>
+							<p class="yearNumber">${movie.startYear || "404!"}</p>
+						</div>
+						<div class="runtime">
+							<i class="fa-regular fa-hourglass-half"></i>
+							<p class="runtimeNumber">${movie.runtimeMinutes || "404!"} min</p>
+						</div>
+					</div>
+					<button class="buyBtn">+ whatch list</button>
+				</div>
+			`;
+			fragment.appendChild(card);
+		}
+
+		// Append the batch to the container
+		container.appendChild(fragment);
+
+		// If there are more movies to render, schedule the next batch
+		if (endIndex < movies.length) {
+			window.requestAnimationFrame(() => {
+				renderBatch(endIndex);
+			});
+		}
+	};
+
+	// Start rendering the first batch
+	renderBatch(0);
+}
+
 //----------function to fetch data from api-------
 export async function fetchData() {
 	const urlMoves = "https://imdb236.p.rapidapi.com/imdb/most-popular-movies";
@@ -27,48 +91,26 @@ export async function fetchData() {
 			(a, b) => b.averageRating - a.averageRating
 		);
 		const random30Movies = shuffleArray(topRatedMovies).slice(0, 30);
+
 		//---------------create movie cards from random 30 movies-----------
-		random30Movies.forEach((movie) => {
-			createMovieCard(
-				movie.primaryImage,
-				movie.originalTitle,
-				movie.averageRating,
-				movie.startYear,
-				movie.runtimeMinutes,
-				"#topTen"
-			);
-		});
+		renderMovieCards(random30Movies, "#topTen");
+
 		//---------get top tv shows----------------
 		const responseTvShow = await fetch(urlTvShows, options);
 		const tvShowData = await responseTvShow.json();
 		const topTvShows = tvShowData
 			.sort((a, b) => b.averageRating - a.averageRating)
 			.slice(0, 30);
+
 		//--------------generate tv shows cards----------------
-		topTvShows.forEach((tvShow) => {
-			createMovieCard(
-				tvShow.primaryImage,
-				tvShow.originalTitle,
-				tvShow.averageRating,
-				tvShow.startYear,
-				tvShow.runtimeMinutes,
-				"#topTvShows"
-			);
-		});
+		renderMovieCards(topTvShows, "#topTvShows");
+
 		//-----------get new release movies------------------
 		const newReleased = data
 			.sort((a, b) => b.startYear - a.startYear)
 			.slice(0, 30);
-		newReleased.forEach((newR) => {
-			createMovieCard(
-				newR.primaryImage,
-				newR.originalTitle,
-				newR.averageRating,
-				newR.startYear,
-				newR.runtime,
-				"#newReleased"
-			);
-		});
+
+		renderMovieCards(newReleased, "#newReleased");
 	} catch (error) {
 		console.error(error);
 	}
