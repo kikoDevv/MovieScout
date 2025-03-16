@@ -1,13 +1,10 @@
 import { findTrailer } from "./trailerFinder.js";
 
 export function setupMovieModal() {
-	// Inject the modal HTML into the page
 	injectModalHTML();
 
-	// Set up event delegation for all buy buttons
 	document.addEventListener("click", (e) => {
 		if (e.target.classList.contains("buyBtn")) {
-			// Get the parent movie card to extract data
 			const movieCard = e.target.closest(".movieCard");
 			if (movieCard) {
 				openMovieModal(movieCard);
@@ -15,7 +12,6 @@ export function setupMovieModal() {
 		}
 	});
 
-	// Set up close functionality
 	document.addEventListener("click", (e) => {
 		if (
 			e.target.classList.contains("closeModalBtn") ||
@@ -25,6 +21,12 @@ export function setupMovieModal() {
 		}
 
 		if (e.target.classList.contains("homeBtn")) {
+			closeMovieModal();
+		}
+	});
+
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") {
 			closeMovieModal();
 		}
 	});
@@ -41,24 +43,23 @@ function injectModalHTML() {
             <div class="right-box">
                 <h2 class="movie-title"></h2>
                 <div class="movie-meta">
-                    <span class="movie-year"></span>
-                    <span class="movie-rating"></span>
-                    <span class="movie-runtime"></span>
+                    <span class="movie-year"><i class="fas fa-calendar-alt"></i> <span class="year-value"></span></span>
+                    <span class="movie-rating"><i class="fas fa-star"></i> <span class="rating-value"></span></span>
+                    <span class="movie-runtime"><i class="fas fa-clock"></i> <span class="runtime-value"></span></span>
                 </div>
                 <iframe id="trailerFrame" allowfullscreen></iframe>
                 <div class="info-box">
                     <p class="movie-description"></p>
                 </div>
                 <div class="btns-box">
-                    <button class="homeBtn">Back to home</button>
-                    <button class="watchListBtn">Add to watch list</button>
+                    <button class="homeBtn"><i class="fas fa-arrow-left"></i> Back to home</button>
+                    <button class="watchListBtn"><i class="fas fa-plus"></i> Add to watch list</button>
                 </div>
             </div>
         </div>
     </div>
     `;
 
-	// Append modal HTML to body if it doesn't already exist
 	if (!document.querySelector(".main-cont")) {
 		const modalContainer = document.createElement("div");
 		modalContainer.innerHTML = modalHTML;
@@ -67,48 +68,61 @@ function injectModalHTML() {
 }
 
 function openMovieModal(movieCard) {
-	// Extract data from the movie card
 	const img = movieCard.querySelector(".moviesImg").src;
 	const name = movieCard.querySelector(".moviesName").textContent;
 	const rating = movieCard.querySelector(".ratingNumber").textContent;
 	const year = movieCard.querySelector(".yearNumber").textContent;
 	const runtime = movieCard.querySelector(".runtimeNumber").textContent;
+	const description =
+		movieCard.dataset.description || "Shittt, 404! No description available for this movie.";
 
-	// Get modal elements
 	const modal = document.querySelector(".main-cont");
 	const movieCover = modal.querySelector(".movieCover");
 	const movieTitle = modal.querySelector(".movie-title");
-	const movieYear = modal.querySelector(".movie-year");
-	const movieRating = modal.querySelector(".movie-rating");
-	const movieRuntime = modal.querySelector(".movie-runtime");
+	const yearValue = modal.querySelector(".year-value");
+	const ratingValue = modal.querySelector(".rating-value");
+	const runtimeValue = modal.querySelector(".runtime-value");
+	const movieDescription = modal.querySelector(".movie-description");
 
-	// Set modal content
 	movieCover.src = img;
 	movieTitle.textContent = name;
-	movieYear.textContent = year;
-	movieRating.textContent = `IMDb: ${rating}`;
-	movieRuntime.textContent = runtime;
+	yearValue.textContent = year;
+	ratingValue.textContent = rating;
+	runtimeValue.textContent = runtime;
+	movieDescription.textContent = description;
 
-	// Find and load trailer
 	findTrailer(name);
 
-	// Show the modal
 	modal.style.display = "flex";
-	document.body.style.overflow = "hidden"; // Prevent scrolling
+	document.body.style.overflow = "hidden";
 
-	// Add animation class
 	setTimeout(() => {
 		modal.classList.add("active");
 	}, 10);
+
+	const detailModal = modal.querySelector(".detail-modal");
+	detailModal.style.transform = "translateY(20px)";
+	setTimeout(() => {
+		detailModal.style.transform = "translateY(0)";
+	}, 50);
 }
 
 function closeMovieModal() {
 	const modal = document.querySelector(".main-cont");
 	if (modal) {
+		const detailModal = modal.querySelector(".detail-modal");
+		detailModal.style.transform = "translateY(20px)";
+
 		modal.classList.remove("active");
+
 		setTimeout(() => {
 			modal.style.display = "none";
-			document.body.style.overflow = "auto"; // Re-enable scrolling
-		}, 300); // Match transition duration
+			document.body.style.overflow = "auto";
+
+			const trailerFrame = modal.querySelector("#trailerFrame");
+			if (trailerFrame) {
+				trailerFrame.src = "";
+			}
+		}, 300);
 	}
 }

@@ -1206,6 +1206,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
   z-index: 1000;
   justify-content: center;
   align-items: center;
@@ -1217,7 +1218,8 @@ body {
 }
 .main-cont .detail-modal {
   display: flex;
-  background-color: blueviolet;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.85) 0%, rgba(90, 24, 154, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   width: 90vw;
   max-width: 1200px;
   height: fit-content;
@@ -1225,73 +1227,154 @@ body {
   overflow: hidden;
   border-radius: 20px;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 80px rgba(138, 43, 226, 0.2);
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .main-cont .detail-modal .closeModalBtn {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
   font-size: 24px;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 10;
+  transition: all 0.2s;
 }
 .main-cont .detail-modal .closeModalBtn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: rotate(90deg);
 }
 .main-cont .detail-modal .left-box {
   flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.main-cont .detail-modal .left-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(90, 24, 154, 0), rgba(90, 24, 154, 0.8));
 }
 .main-cont .detail-modal .left-box .movieCover {
   height: 90vh;
   width: 34vw;
   max-height: 90vh;
   object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: brightness(0.95);
+}
+.main-cont .detail-modal .left-box .movieCover:hover {
+  transform: scale(1.03);
 }
 .main-cont .detail-modal .right-box {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 25px;
+  padding: 30px;
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+.main-cont .detail-modal .right-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  z-index: -1;
 }
 .main-cont .detail-modal .right-box .movie-title {
-  font-size: 28px;
+  font-size: 32px;
+  font-weight: bold;
   margin-bottom: 10px;
   color: white;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.main-cont .detail-modal .right-box .movie-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.3));
+  border-radius: 2px;
 }
 .main-cont .detail-modal .right-box .movie-meta {
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
-  color: #b3b3b3;
+  margin-top: 15px;
+  color: rgba(255, 255, 255, 0.8);
 }
 .main-cont .detail-modal .right-box .movie-meta span {
   font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
 }
 .main-cont .detail-modal .right-box #trailerFrame {
   width: 100%;
   height: 45vh;
   border: none;
-  border-radius: 8px;
-  background-color: black;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.main-cont .detail-modal .right-box #trailerFrame:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
 .main-cont .detail-modal .right-box .info-box {
-  padding: 20px 0;
+  padding: 15px;
   max-height: 150px;
   overflow-y: auto;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1);
+}
+.main-cont .detail-modal .right-box .info-box::-webkit-scrollbar {
+  width: 6px;
+}
+.main-cont .detail-modal .right-box .info-box::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.main-cont .detail-modal .right-box .info-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
 }
 .main-cont .detail-modal .right-box .info-box .movie-description {
-  color: #d9d9d9;
-  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  font-size: 15px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .main-cont .detail-modal .right-box .btns-box {
   display: flex;
@@ -1306,38 +1389,75 @@ body {
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.main-cont .detail-modal .right-box .btns-box button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+.main-cont .detail-modal .right-box .btns-box button:hover::before {
+  transform: translateX(100%);
 }
 .main-cont .detail-modal .right-box .btns-box button.homeBtn {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
+  backdrop-filter: blur(5px);
 }
 .main-cont .detail-modal .right-box .btns-box button.homeBtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 .main-cont .detail-modal .right-box .btns-box button.watchListBtn {
   background: linear-gradient(to right, #ff4b2b, #ff416c);
   color: white;
+  box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
 }
 .main-cont .detail-modal .right-box .btns-box button.watchListBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 75, 43, 0.4);
+}
+.main-cont .detail-modal .right-box .btns-box button.watchListBtn:active {
+  transform: translateY(-1px);
 }
 @media (max-width: 768px) {
   .main-cont .detail-modal {
     flex-direction: column;
     overflow-y: auto;
+    transform: translateY(0);
+    max-height: 95vh;
+  }
+  .main-cont .detail-modal .left-box::after {
+    display: none;
   }
   .main-cont .detail-modal .left-box .movieCover {
     width: 100%;
     height: 300px;
   }
   .main-cont .detail-modal .right-box {
-    padding: 15px;
+    padding: 20px;
+  }
+  .main-cont .detail-modal .right-box .movie-title {
+    font-size: 24px;
   }
   .main-cont .detail-modal .right-box #trailerFrame {
     height: 250px;
+  }
+  .main-cont .detail-modal .right-box .btns-box {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .main-cont .detail-modal .right-box .btns-box button {
+    width: 100%;
   }
 }
 
