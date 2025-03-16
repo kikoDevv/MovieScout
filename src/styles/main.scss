@@ -1,9 +1,10 @@
 //-------------removes scrollbar from right side of the web-----
-html, body {
+html,
+body {
 	scrollbar-width: none;
 	margin: 0;
 	padding: 0;
-  }
+}
 //--------------header----------------------
 .header {
 	display: grid;
@@ -348,6 +349,140 @@ html, body {
 		margin: 0px 0px 0px 25px;
 		padding: 0px;
 	}
+
+	.pagination-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 15px;
+		margin: 20px 0;
+		position: relative;
+
+		.pagination-dots {
+			display: flex;
+			gap: 12px;
+			position: relative;
+			align-items: center;
+
+			.dot {
+				width: 14px;
+				height: 14px;
+				border-radius: 50%;
+				background-color: rgba(255, 255, 255, 0.2);
+				cursor: pointer;
+				transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+				position: relative;
+				border: none;
+				padding: 0;
+				margin: 0 8px; /* Increased space between dots */
+
+				/* Create a larger hit area */
+				&::before {
+					content: "";
+					position: absolute;
+					top: -10px;
+					left: -10px;
+					right: -10px;
+					bottom: -10px;
+				}
+
+				&.active {
+					background-color: #ffb509;
+					transform: scale(1.2);
+					box-shadow: 0 0 12px rgba(255, 181, 9, 0.6);
+				}
+
+				&:hover:not(.active) {
+					background-color: rgba(255, 255, 255, 0.5);
+					transform: scale(1.1);
+				}
+
+				&:focus {
+					outline: none;
+					box-shadow: 0 0 0 3px rgba(255, 181, 9, 0.5);
+				}
+
+				&::after {
+					content: "";
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%) scale(0);
+					width: 24px;
+					height: 24px;
+					background-color: rgba(255, 181, 9, 0.2);
+					border-radius: 50%;
+					z-index: -1;
+					transition: transform 0.3s ease;
+				}
+
+				&:hover::after {
+					transform: translate(-50%, -50%) scale(1);
+				}
+			}
+		}
+
+		.nav-arrow {
+			width: 40px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			background-color: rgba(45, 45, 55, 0.7);
+			border-radius: 50%;
+			cursor: pointer;
+			transition: all 0.25s ease;
+			backdrop-filter: blur(5px);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+
+			i {
+				font-size: 16px;
+				transition: transform 0.2s ease;
+			}
+
+			&:hover {
+				background-color: rgba(255, 181, 9, 0.8);
+				transform: scale(1.05);
+
+				&.left-arrow i {
+					transform: translateX(-2px);
+				}
+
+				&.right-arrow i {
+					transform: translateX(2px);
+				}
+			}
+
+			&.disabled {
+				opacity: 0.35;
+				cursor: not-allowed;
+
+				&:hover {
+					background-color: rgba(45, 45, 55, 0.7);
+					transform: scale(1);
+
+					i {
+						transform: translateX(0);
+					}
+				}
+				&:active {
+					transform: scale(0.95);
+				}
+
+				/* Add larger clickable area */
+				&::before {
+					content: "";
+					position: absolute;
+					top: -5px;
+					left: -5px;
+					right: -5px;
+					bottom: -5px;
+				}
+			}
+		}
+	}
+
 	.cardContainer {
 		visibility: hidden;
 		opacity: 0;

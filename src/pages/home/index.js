@@ -2,6 +2,8 @@ import { lazyloadMovies } from "./scrollTiming.js";
 import { fetchData } from "./fetchMovies.js";
 import { searchBarSticky } from "./scrollTiming.js";
 import { filterMenu } from "./filterMenu.js";
+import { createPaginationDots } from "./scrollIndicator.js";
+
 //------------creates movie card and fetchs data from IMDB api-----------------
 fetchData();
 //-------lazy load movieCard animation--------
@@ -10,3 +12,5 @@ lazyloadMovies();
 searchBarSticky();
 //--------Open and close filter menu--------
 filterMenu();
+//--------Create pagination dots for all cardContainers--------
+createPaginationDots();
