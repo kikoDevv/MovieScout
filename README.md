@@ -26,12 +26,17 @@ Welcome to **Kino Cinema** – a sleek and responsive web app for discovering mo
 ##📸 Screenshots:
 
 
-https://github.com/user-attachments/assets/b241ac82-7d7f-417f-8bc2-3a902a29a3d2
+
+
+https://github.com/user-attachments/assets/8f2271ec-2ae2-460f-9c7b-916764f90253
+
+
+
+
+https://github.com/user-attachments/assets/47b01e5f-25d5-4083-8b5b-76a5f7350984
+
 
 
 📫 Contact:
 	•	Email: kiko.devv@gmail.com
 	•	GitHub: [github.com/kiko.devv]()
-
-🙏 Acknowledgments:
-Thanks to IMDb API for providing accurate and reliable movie data, which makes this project possible!
