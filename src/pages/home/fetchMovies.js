@@ -8,17 +8,13 @@ function shuffleArray(array) {
 	return array;
 }
 
-// Helper function to render movie cards in batches
 function renderMovieCards(movies, containerId, batchSize = 5) {
 	const container = document.querySelector(containerId);
 
-	// Clear any existing content
 	container.innerHTML = "";
 
-	// Create a document fragment to batch DOM operations
 	const fragment = document.createDocumentFragment();
 
-	// Function to render a batch of movies
 	const renderBatch = (startIndex) => {
 		const endIndex = Math.min(startIndex + batchSize, movies.length);
 
@@ -57,10 +53,8 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 			fragment.appendChild(card);
 		}
 
-		// Append the batch to the container
 		container.appendChild(fragment);
 
-		// If there are more movies to render, schedule the next batch
 		if (endIndex < movies.length) {
 			window.requestAnimationFrame(() => {
 				renderBatch(endIndex);
@@ -68,7 +62,6 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 		}
 	};
 
-	// Start rendering the first batch
 	renderBatch(0);
 }
 
