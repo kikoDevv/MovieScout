@@ -320,6 +320,32 @@ body {
   gap: 15px;
   margin: 20px 0;
   position: relative;
+  transition: opacity 0.3s ease;
+}
+.moviesSection .pagination-container.transitioning .dot {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.moviesSection .pagination-container.transitioning .dot.active {
+  transform: scale(1.3);
+}
+.moviesSection .pagination-container.transitioning .nav-arrow {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.moviesSection .pagination-container.transitioning .nav-arrow.disabled {
+  opacity: 0.25;
+  transform: scale(0.95);
+}
+.moviesSection .pagination-container.transitioning.move-right .pagination-dots .dot:not(.active).previous {
+  transform: scale(0.9);
+  opacity: 0.7;
+  background-color: rgba(255, 181, 9, 0.3);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.moviesSection .pagination-container.transitioning.move-left .pagination-dots .dot:not(.active).previous {
+  transform: scale(0.9);
+  opacity: 0.7;
+  background-color: rgba(255, 181, 9, 0.3);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .moviesSection .pagination-container .pagination-dots {
   display: flex;
@@ -333,11 +359,12 @@ body {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   position: relative;
   border: none;
   padding: 0;
-  margin: 0 8px; /* Increased space between dots */
+  margin: 0 8px;
+  will-change: transform, background-color, box-shadow;
   /* Create a larger hit area */
 }
 .moviesSection .pagination-container .pagination-dots .dot::before {
@@ -352,30 +379,68 @@ body {
   background-color: #ffb509;
   transform: scale(1.2);
   box-shadow: 0 0 12px rgba(255, 181, 9, 0.6);
+  z-index: 2;
+}
+.moviesSection .pagination-container .pagination-dots .dot.previous {
+  z-index: 1;
+}
+@keyframes dot-slide-right {
+  0% {
+    transform: translateX(-20px) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0) scale(1.2);
+    opacity: 1;
+  }
+}
+@keyframes dot-slide-left {
+  0% {
+    transform: translateX(20px) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0) scale(1.2);
+    opacity: 1;
+  }
+}
+.moviesSection .pagination-container .pagination-dots .dot.slide-right {
+  animation: dot-slide-right 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.moviesSection .pagination-container .pagination-dots .dot.slide-left {
+  animation: dot-slide-left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 .moviesSection .pagination-container .pagination-dots .dot:hover:not(.active) {
-  background-color: rgba(255, 255, 255, 0.5);
-  transform: scale(1.1);
+  background-color: rgba(255, 181, 9, 0.4);
+  transform: scale(1.15);
+  box-shadow: 0 0 8px rgba(255, 181, 9, 0.4);
 }
-.moviesSection .pagination-container .pagination-dots .dot:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 181, 9, 0.5);
-}
-.moviesSection .pagination-container .pagination-dots .dot::after {
+.moviesSection .pagination-container .pagination-dots .dot:hover:not(.active)::before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 24px;
-  height: 24px;
-  background-color: rgba(255, 181, 9, 0.2);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: 50%;
-  z-index: -1;
-  transition: transform 0.3s ease;
+  background: transparent;
+  border: 2px solid rgba(255, 181, 9, 0.6);
+  animation: pulse-border 1.5s ease-out infinite;
 }
-.moviesSection .pagination-container .pagination-dots .dot:hover::after {
-  transform: translate(-50%, -50%) scale(1);
+.moviesSection .pagination-container .pagination-dots .dot-flow-container {
+  position: absolute;
+  height: 4px;
+  background: linear-gradient(to right, rgba(255, 181, 9, 0), rgba(255, 181, 9, 0.8), rgba(255, 181, 9, 0));
+  bottom: 4px;
+  border-radius: 2px;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: left center;
+  pointer-events: none;
+}
+.moviesSection .pagination-container .pagination-dots .dot-flow-container.animate {
+  opacity: 0.8;
+  transform: scaleX(1);
 }
 .moviesSection .pagination-container .nav-arrow {
   width: 40px;
@@ -387,28 +452,30 @@ body {
   background-color: rgba(45, 45, 55, 0.7);
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  will-change: transform, background-color;
+  position: relative;
+  /* Add larger clickable area */
 }
 .moviesSection .pagination-container .nav-arrow i {
   font-size: 16px;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .moviesSection .pagination-container .nav-arrow:hover {
   background-color: rgba(255, 181, 9, 0.8);
   transform: scale(1.05);
 }
 .moviesSection .pagination-container .nav-arrow:hover.left-arrow i {
-  transform: translateX(-2px);
+  transform: translateX(-3px);
 }
 .moviesSection .pagination-container .nav-arrow:hover.right-arrow i {
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 .moviesSection .pagination-container .nav-arrow.disabled {
   opacity: 0.35;
   cursor: not-allowed;
-  /* Add larger clickable area */
 }
 .moviesSection .pagination-container .nav-arrow.disabled:hover {
   background-color: rgba(45, 45, 55, 0.7);
@@ -420,7 +487,7 @@ body {
 .moviesSection .pagination-container .nav-arrow.disabled:active {
   transform: scale(0.95);
 }
-.moviesSection .pagination-container .nav-arrow.disabled::before {
+.moviesSection .pagination-container .nav-arrow::before {
   content: "";
   position: absolute;
   top: -5px;
@@ -441,6 +508,7 @@ body {
   scroll-snap-type: x mandatory;
   gap: 20px;
   padding: 20px 20px;
+  scroll-behavior: smooth;
 }
 .moviesSection .cardContainer::-webkit-scrollbar {
   display: none;
@@ -622,6 +690,16 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes pulse-border {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
   }
 }
 #moviesPageBody {
