@@ -3,6 +3,7 @@ import { fetchData } from "./fetchMovies.js";
 import { searchBarSticky } from "./scrollTiming.js";
 import { filterMenu } from "./filterMenu.js";
 import { createPaginationDots } from "./scrollIndicator.js";
+import { setupMovieModal } from "../moviesDetails/movieModal.js";
 
 //------------creates movie card and fetchs data from IMDB api-----------------
 fetchData();
@@ -14,3 +15,5 @@ searchBarSticky();
 filterMenu();
 //--------Create pagination dots for all cardContainers--------
 createPaginationDots();
+//--------Setup movie details modal--------
+setupMovieModal();
