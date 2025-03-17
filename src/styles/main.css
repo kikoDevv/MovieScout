@@ -1345,7 +1345,6 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .main-cont .detail-modal .right-box #trailerFrame:hover {
-  transform: translateY(-5px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
 .main-cont .detail-modal .right-box .info-box {
@@ -1418,7 +1417,7 @@ body {
   transform: translateY(-2px);
 }
 .main-cont .detail-modal .right-box .btns-box button.watchListBtn {
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: linear-gradient(to right, #0d1ad3, #4147ff);
   color: white;
   box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
 }
@@ -1458,6 +1457,217 @@ body {
   }
   .main-cont .detail-modal .right-box .btns-box button {
     width: 100%;
+  }
+}
+
+.subscribe-section {
+  padding: 80px 20px;
+  background-color: #0e0e1b;
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-section .subscribe-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+  background: linear-gradient(135deg, rgba(30, 30, 50, 0.7), rgba(60, 60, 100, 0.4));
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 60px;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+.subscribe-section .subscribe-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 48px rgba(255, 181, 9, 0.2);
+}
+.subscribe-section .subscribe-content {
+  flex: 1;
+  z-index: 1;
+}
+.subscribe-section .subscribe-content h2 {
+  font-family: "Work Sans", sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+  background: linear-gradient(90deg, #fff, #ffb509);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+.subscribe-section .subscribe-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  max-width: 600px;
+  line-height: 1.6;
+}
+.subscribe-section .subscribe-form {
+  display: flex;
+  margin-bottom: 25px;
+  max-width: 500px;
+}
+.subscribe-section .subscribe-form input[type=email] {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px 0 0 30px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  color: white;
+  transition: all 0.3s;
+}
+.subscribe-section .subscribe-form input[type=email]:focus {
+  outline: none;
+  border-color: #ffb509;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 181, 9, 0.3);
+}
+.subscribe-section .subscribe-form input[type=email]::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.subscribe-section .subscribe-form button {
+  background: linear-gradient(45deg, #ffb509, #ff8c00);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 0 30px 30px 0;
+  padding: 15px 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: "Work Sans", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-section .subscribe-form button:hover {
+  background: linear-gradient(45deg, #ff8c00, #ffb509);
+  transform: translateY(-2px);
+}
+.subscribe-section .subscribe-form button:active {
+  transform: translateY(0);
+}
+.subscribe-section .subscribe-form button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+.subscribe-section .subscribe-form button:hover::before {
+  transform: scale(1);
+  opacity: 1;
+}
+.subscribe-section .subscribe-features {
+  display: flex;
+  gap: 25px;
+  margin-top: 30px;
+}
+.subscribe-section .subscribe-features .feature {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+.subscribe-section .subscribe-features .feature i {
+  color: #ffb509;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+.subscribe-section .subscribe-features .feature span {
+  font-size: 0.9rem;
+}
+.subscribe-section .subscribe-decoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.subscribe-section .subscribe-decoration .decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 181, 9, 0.3), rgba(255, 140, 0, 0.1));
+}
+.subscribe-section .subscribe-decoration .decoration-circle:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+.subscribe-section .subscribe-decoration .decoration-circle:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  right: 100px;
+  animation: float 12s ease-in-out infinite 1s;
+}
+.subscribe-section .subscribe-decoration .decoration-circle:nth-child(3) {
+  width: 150px;
+  height: 150px;
+  top: 40%;
+  right: 40px;
+  animation: float 10s ease-in-out infinite 0.5s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+@media screen and (max-width: 900px) {
+  .subscribe-section {
+    padding: 60px 20px;
+  }
+  .subscribe-section .subscribe-container {
+    padding: 40px;
+  }
+  .subscribe-section .subscribe-content h2 {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .subscribe-section .subscribe-container {
+    padding: 30px;
+  }
+  .subscribe-section .subscribe-features {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .subscribe-section .subscribe-decoration {
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .subscribe-section .subscribe-form {
+    flex-direction: column;
+  }
+  .subscribe-section .subscribe-form input[type=email] {
+    border-radius: 30px;
+    margin-bottom: 10px;
+  }
+  .subscribe-section .subscribe-form button {
+    border-radius: 30px;
+    width: 100%;
+  }
+  .subscribe-section .subscribe-content h2 {
+    font-size: 1.8rem;
   }
 }
 
