@@ -47,7 +47,7 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 							<p class="runtimeNumber">${movie.runtimeMinutes || "404!"} min</p>
 						</div>
 					</div>
-					<button class="buyBtn">+ whatch list</button>
+					<button class="buyBtn">About movie</button>
 				</div>
 			`;
 			fragment.appendChild(card);

@@ -30,7 +30,7 @@ export function createMovieCard(img, name, rating, year, runtime, container) {
                         <p class="runtimeNumber">${runtime || fallback} min</p>
                     </div>
                 </div>
-                <button class="buyBtn">+ whatch list</button>
+                <button class="buyBtn">About movie</button>
             </div>
         </div>
     `;
