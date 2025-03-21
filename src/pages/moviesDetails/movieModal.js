@@ -70,6 +70,56 @@ function injectModalHTML() {
 	}
 }
 
+function extractDominantColor(imageUrl) {
+	return new Promise((resolve, reject) => {
+		const img = new Image();
+		img.crossOrigin = "Anonymous";
+		img.onload = () => {
+			const canvas = document.createElement("canvas");
+			const ctx = canvas.getContext("2d");
+			canvas.width = img.width;
+			canvas.height = img.height;
+
+			ctx.drawImage(img, 0, 0, img.width, img.height);
+
+			const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			const data = imageData.data;
+			const colorCounts = {};
+			let dominantColor = { r: 90, g: 24, b: 154 };
+
+			for (let i = 0; i < data.length; i += 20) {
+				const r = data[i];
+				const g = data[i + 1];
+				const b = data[i + 2];
+
+				if ((r < 30 && g < 30 && b < 30) || (r > 230 && g > 230 && b > 230))
+					continue;
+
+				const rgb = `${r},${g},${b}`;
+				colorCounts[rgb] = (colorCounts[rgb] || 0) + 1;
+			}
+
+			let maxCount = 0;
+			for (const color in colorCounts) {
+				if (colorCounts[color] > maxCount) {
+					maxCount = colorCounts[color];
+					const [r, g, b] = color.split(",").map(Number);
+					dominantColor = { r, g, b };
+				}
+			}
+
+			resolve(dominantColor);
+		};
+
+		img.onerror = () => {
+			reject(new Error("Failed to load image"));
+			resolve({ r: 90, g: 24, b: 154 });
+		};
+
+		img.src = imageUrl;
+	});
+}
+
 async function openMovieModal(movieCard) {
 	const img = movieCard.querySelector(".moviesImg").src;
 	const name = movieCard.querySelector(".moviesName").textContent;
@@ -78,6 +128,7 @@ async function openMovieModal(movieCard) {
 	const runtime = movieCard.querySelector(".runtimeNumber").textContent;
 
 	const modal = document.querySelector(".main-cont");
+	const detailModal = modal.querySelector(".detail-modal");
 	const movieCover = modal.querySelector(".movieCover");
 	const movieTitle = modal.querySelector(".movie-title");
 	const yearValue = modal.querySelector(".year-value");
@@ -95,6 +146,23 @@ async function openMovieModal(movieCard) {
 	runtimeValue.textContent = runtime;
 	movieDescription.textContent = "Loading description...";
 
+	try {
+		const dominantColor = await extractDominantColor(img);
+		detailModal.style.background = `linear-gradient(
+            135deg,
+            rgba(${dominantColor.r}, ${dominantColor.g}, ${
+			dominantColor.b
+		}, 0.85) 0%,
+            rgba(${Math.max(0, dominantColor.r - 48)}, ${Math.max(
+			0,
+			dominantColor.g - 48
+		)}, ${Math.max(0, dominantColor.b - 48)}, 0.9) 100%
+        )`;
+	} catch (error) {
+		console.error("Error extracting color:", error);
+		// Fallback to default gradient
+	}
+
 	modal.style.display = "flex";
 	document.body.style.overflow = "hidden";
 
@@ -102,13 +170,11 @@ async function openMovieModal(movieCard) {
 		modal.classList.add("active");
 	}, 10);
 
-	const detailModal = modal.querySelector(".detail-modal");
 	detailModal.style.transform = "translateY(20px)";
 	setTimeout(() => {
 		detailModal.style.transform = "translateY(0)";
 	}, 50);
 
-	// Fetch additional details from TMDB API
 	try {
 		const apiKey = "7ae0a5d36394abcbfe893ebb3cd504f9";
 		const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
