@@ -25,8 +25,8 @@
 			rgba(90, 24, 154, 0.9) 100%
 		);
 		border: 1px solid rgba(255, 255, 255, 0.1);
-		width: 90vw;
-		max-width: 1200px;
+		width: 85vw;
+		// max-width: 1200px;
 		height: fit-content;
 		max-height: 90vh;
 		overflow: hidden;
@@ -122,7 +122,7 @@
 			.movie-title {
 				font-size: 32px;
 				font-weight: bold;
-				margin-bottom: 10px;
+				margin: 0px 0px 10px 0px;
 				color: white;
 				letter-spacing: 0.5px;
 				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -142,19 +142,59 @@
 
 			.movie-meta {
 				display: flex;
-				gap: 20px;
+				// flex-wrap: wrap;
+				justify-content: space-between;
+				gap: 12px;
 				margin-bottom: 20px;
-				margin-top: 15px;
-				color: rgba(255, 255, 255, 0.8);
-
+				align-items: center;
 				span {
-					font-size: 14px;
-					display: inline-flex;
+					display: flex;
 					align-items: center;
-					padding: 4px 10px;
-					background-color: rgba(0, 0, 0, 0.2);
-					border-radius: 15px;
-					backdrop-filter: blur(5px);
+					font-size: 14px;
+					color: rgba(255, 255, 255, 0.85);
+
+					i {
+						margin-right: 5px;
+					}
+				}
+				.movie-runtime{
+					min-width: fit-content;
+				}
+
+				.movie-genres {
+					// margin-top: 8px;
+					width: 100%;
+					.movie-genre-wrapper {
+						display: flex;
+						align-items: center;
+						gap: 8px;
+
+						i {
+							color: rgba(255, 255, 255, 0.7);
+						}
+					}
+
+					.genre-tags {
+						display: flex;
+						flex-wrap: wrap;
+						gap: 6px;
+					}
+
+					.genre-tag {
+						background: rgba(255, 255, 255, 0.15);
+						border-radius: 12px;
+						padding: 3px 10px;
+						font-size: 12px;
+						color: white;
+						backdrop-filter: blur(5px);
+						border: 1px solid rgba(255, 255, 255, 0.1);
+						transition: all 0.2s;
+
+						&:hover {
+							background: rgba(255, 255, 255, 0.25);
+							transform: translateY(-2px);
+						}
+					}
 				}
 			}
 
@@ -174,7 +214,7 @@
 
 			.info-box {
 				padding: 15px;
-				max-height: 150px;
+				max-height: 70px;
 				overflow-y: auto;
 				background: rgba(0, 0, 0, 0.15);
 				border-radius: 10px;
@@ -202,6 +242,40 @@
 					line-height: 1.6;
 					font-size: 15px;
 					text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+					padding: 0px;
+					margin: 0px;
+				}
+			}
+
+			.movie-genres {
+				margin: 15px 0;
+
+				h4 {
+					margin-bottom: 10px;
+					font-size: 16px;
+					color: rgba(255, 255, 255, 0.9);
+				}
+
+				.genre-tags {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 8px;
+				}
+
+				.genre-tag {
+					background: rgba(255, 255, 255, 0.15);
+					border-radius: 15px;
+					padding: 5px 12px;
+					font-size: 13px;
+					color: white;
+					backdrop-filter: blur(5px);
+					border: 1px solid rgba(255, 255, 255, 0.1);
+					transition: all 0.2s;
+
+					&:hover {
+						background: rgba(255, 255, 255, 0.25);
+						transform: translateY(-2px);
+					}
 				}
 			}
 
@@ -209,8 +283,9 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
+				padding-top: 10px;
 				margin-top: auto;
-				padding-top: 15px;
+				padding-bottom: 10px;
 
 				button {
 					padding: 12px 25px;
@@ -290,7 +365,7 @@
 			}
 
 			.right-box {
-				padding: 20px;
+				padding: 10px;
 
 				.movie-title {
 					font-size: 24px;
