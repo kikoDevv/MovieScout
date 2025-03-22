@@ -601,6 +601,17 @@ body {
 			display: none;
 		}
 		scroll-behavior: smooth; // Ensure smooth scrolling is applied
+
+		// Add reveal animation properties
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.4s ease-out, transform 0.5s ease-out;
+
+		&.reveal-container {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
 		.movieCard {
 			border-radius: 20px;
 			overflow: hidden;
@@ -610,6 +621,19 @@ body {
 			transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 			cursor: pointer;
 			contain: content;
+
+			// Add card staggered animation properties
+			opacity: 0;
+			transform: translateY(15px) scale(0.97);
+			transition: opacity 0.5s ease-out,
+				transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+				box-shadow 0.2s ease-in-out;
+
+			&.reveal-card {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+			}
+
 			&:hover {
 				box-shadow: #ffb509 0px 0px 9px 4px;
 				transform: scale(1.03);

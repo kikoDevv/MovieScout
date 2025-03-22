@@ -17,8 +17,9 @@ let allInitialized = false;
 function renderMovieCards(movies, containerId, batchSize = 5) {
 	const container = document.querySelector(containerId);
 
-	// Clear container (removed load class manipulation)
+	// Clear container and ensure it doesn't have animation classes yet
 	container.innerHTML = "";
+	container.classList.remove("reveal-container");
 
 	const fragment = document.createDocumentFragment();
 
@@ -29,6 +30,7 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 			const movie = movies[i];
 			const card = document.createElement("div");
 			card.className = "movieCard";
+			// Don't add reveal-card class yet - will be added by IntersectionObserver
 			card.innerHTML = `
 				<img
 					class="moviesImg"
@@ -129,7 +131,9 @@ function checkAllContainersLoaded() {
 					if (
 						container &&
 						(!container.nextElementSibling ||
-						!container.nextElementSibling.classList.contains("pagination-container"))
+							!container.nextElementSibling.classList.contains(
+								"pagination-container"
+							))
 					) {
 						console.log(`Reinitializing missing pagination for ${id}`);
 						initializeContainerPagination(container);
@@ -146,7 +150,8 @@ function checkAllContainersLoaded() {
 
 // Helper function to initialize pagination for a specific container
 function initializeContainerPagination(container) {
-	if (container) { // Removed childElementCount check to force setup
+	if (container) {
+		// Removed childElementCount check to force setup
 		// Import the specific setup function from scrollIndicator
 		import("./scrollIndicator.js").then((module) => {
 			if (typeof module.setupPagination === "function") {

@@ -165,7 +165,10 @@ export function setupPagination(container, retryCount = 0) {
 
 	// Adjusted calculation to ensure we show pagination
 	// Use Math.floor to be more conservative about how many cards fit
-	const visibleCards = Math.max(1, Math.floor(containerWidth / (cardWidth + 20))); // Adding gap
+	const visibleCards = Math.max(
+		1,
+		Math.floor(containerWidth / (cardWidth + 20))
+	); // Adding gap
 	const numPages = Math.max(2, Math.ceil(totalCards / visibleCards));
 
 	container.dataset.totalWidth = scrollWidth.toString();
@@ -313,7 +316,8 @@ export function setupPagination(container, retryCount = 0) {
 function initPagination() {
 	const movieContainers = document.querySelectorAll(".cardContainer");
 	movieContainers.forEach((container) => {
-		if (container.id) { // Removed childElementCount check to force initialization
+		if (container.id) {
+			// Removed childElementCount check to force initialization
 			setupPagination(container);
 		}
 	});
@@ -325,7 +329,9 @@ function initPagination() {
 			if (
 				container.id &&
 				(!container.nextElementSibling ||
-				!container.nextElementSibling.classList.contains("pagination-container"))
+					!container.nextElementSibling.classList.contains(
+						"pagination-container"
+					))
 			) {
 				console.log(`Second attempt at pagination for ${container.id}`);
 				setupPagination(container);
