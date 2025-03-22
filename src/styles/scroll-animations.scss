@@ -1,0 +1,133 @@
+// Styles for pagination and scroll animations
+
+// Container styles
+.cardContainer {
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+	&.load {
+		overflow-x: auto;
+		scrollbar-width: none; // Hide scrollbar in Firefox
+
+		&::-webkit-scrollbar {
+			display: none; // Hide scrollbar in Chrome
+		}
+	}
+}
+
+// Pagination container
+.pagination-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10px auto;
+	position: relative;
+	z-index: 5;
+
+	&.transitioning {
+		pointer-events: none;
+	}
+
+	// Dots container
+	.pagination-dots {
+		display: flex;
+		position: relative;
+		margin: 0 10px;
+
+		.dot {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: #ccc;
+			margin: 0 5px;
+			border: none;
+			padding: 0;
+			cursor: pointer;
+			transition: transform 0.3s ease, background-color 0.3s ease;
+
+			&.active {
+				background-color: #ff5722;
+				transform: scale(1.2);
+			}
+
+			&.previous {
+				transition: none;
+			}
+
+			&.slide-right {
+				animation: slideFromLeft 0.4s ease forwards;
+			}
+
+			&.slide-left {
+				animation: slideFromRight 0.4s ease forwards;
+			}
+		}
+
+		// Flow animation element
+		.dot-flow-container {
+			position: absolute;
+			height: 2px;
+			background-color: #ff5722;
+			top: 50%;
+			margin-top: -1px;
+			opacity: 0;
+			transform-origin: left;
+
+			&.animate {
+				animation: flowAnimation 0.6s ease-in-out;
+			}
+		}
+	}
+
+	// Arrow styles
+	.nav-arrow {
+		width: 30px;
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+
+		&.disabled {
+			opacity: 0.3;
+			cursor: default;
+		}
+	}
+}
+
+// Animation keyframes
+@keyframes flowAnimation {
+	0% {
+		opacity: 0;
+		transform: scaleX(0);
+	}
+	50% {
+		opacity: 1;
+		transform: scaleX(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scaleX(1);
+	}
+}
+
+@keyframes slideFromLeft {
+	0% {
+		transform: translateX(-10px) scale(0.8);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0) scale(1.2);
+		opacity: 1;
+	}
+}
+
+@keyframes slideFromRight {
+	0% {
+		transform: translateX(10px) scale(0.8);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0) scale(1.2);
+		opacity: 1;
+	}
+}

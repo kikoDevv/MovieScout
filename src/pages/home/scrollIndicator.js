@@ -12,15 +12,8 @@ export function createPaginationDots() {
 	}, 2000);
 }
 
-function initPagination() {
-	const movieContainers = document.querySelectorAll(".cardContainer");
-	movieContainers.forEach((container) => {
-		if (container.id) {
-			setupPagination(container);
-		}
-	});
-}
-function setupPagination(container, retryCount = 0) {
+// Export setupPagination to allow direct initialization for specific containers
+export function setupPagination(container, retryCount = 0) {
 	const maxRetries = 10;
 
 	if (!container.classList.contains("load")) {
@@ -205,6 +198,16 @@ function setupPagination(container, retryCount = 0) {
 		}, 100)
 	);
 }
+
+function initPagination() {
+	const movieContainers = document.querySelectorAll(".cardContainer");
+	movieContainers.forEach((container) => {
+		if (container.id) {
+			setupPagination(container);
+		}
+	});
+}
+
 function scrollToPage(container, pageIndex) {
 	const paginationContainer = container.nextElementSibling;
 	if (!paginationContainer) return;

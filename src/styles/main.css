@@ -857,6 +857,117 @@ body {
     background-position-x: 1000px;
   }
 }
+.cardContainer {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.cardContainer.load {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.cardContainer.load::-webkit-scrollbar {
+  display: none;
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  position: relative;
+  z-index: 5;
+}
+.pagination-container.transitioning {
+  pointer-events: none;
+}
+.pagination-container .pagination-dots {
+  display: flex;
+  position: relative;
+  margin: 0 10px;
+}
+.pagination-container .pagination-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.pagination-container .pagination-dots .dot.active {
+  background-color: #ff5722;
+  transform: scale(1.2);
+}
+.pagination-container .pagination-dots .dot.previous {
+  transition: none;
+}
+.pagination-container .pagination-dots .dot.slide-right {
+  animation: slideFromLeft 0.4s ease forwards;
+}
+.pagination-container .pagination-dots .dot.slide-left {
+  animation: slideFromRight 0.4s ease forwards;
+}
+.pagination-container .pagination-dots .dot-flow-container {
+  position: absolute;
+  height: 2px;
+  background-color: #ff5722;
+  top: 50%;
+  margin-top: -1px;
+  opacity: 0;
+  transform-origin: left;
+}
+.pagination-container .pagination-dots .dot-flow-container.animate {
+  animation: flowAnimation 0.6s ease-in-out;
+}
+.pagination-container .nav-arrow {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.pagination-container .nav-arrow.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@keyframes flowAnimation {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-10px) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1.2);
+    opacity: 1;
+  }
+}
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(10px) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1.2);
+    opacity: 1;
+  }
+}
 #contact-page-body {
   padding: 0px;
   margin: 0px;
