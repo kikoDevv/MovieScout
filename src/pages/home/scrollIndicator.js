@@ -1,14 +1,11 @@
 export function createPaginationDots() {
-	// Immediate initialization attempt
 	initPagination();
 
-	// Also initialize on window load for fully rendered content
 	window.addEventListener("load", () => {
 		console.log("Window loaded, initializing pagination");
 		initPagination();
 	});
 
-	// Re-initialize on resize
 	window.addEventListener(
 		"resize",
 		debounce(() => {
@@ -16,12 +13,10 @@ export function createPaginationDots() {
 		}, 250)
 	);
 
-	// Safety timeout for delayed initialization
 	setTimeout(() => {
 		initPagination();
 	}, 1000);
 
-	// Secondary safety timeout
 	setTimeout(() => {
 		const containers = document.querySelectorAll(".cardContainer");
 		containers.forEach((container) => {
@@ -35,11 +30,9 @@ export function createPaginationDots() {
 		});
 	}, 2000);
 
-	// Set up mutation observer to detect when content is added
 	setupContentObserver();
 }
 
-// Monitor DOM changes to detect when movie cards are added
 function setupContentObserver() {
 	const movieSection = document.querySelector(".moviesSection");
 	if (!movieSection) return;
@@ -48,7 +41,6 @@ function setupContentObserver() {
 		let shouldInit = false;
 
 		mutations.forEach((mutation) => {
-			// If nodes were added and they're movie cards
 			if (mutation.addedNodes.length > 0) {
 				for (let i = 0; i < mutation.addedNodes.length; i++) {
 					const node = mutation.addedNodes[i];
@@ -59,7 +51,6 @@ function setupContentObserver() {
 				}
 			}
 
-			// Check for any changes to cardContainer classes
 			if (
 				mutation.type === "attributes" &&
 				mutation.attributeName === "class" &&
@@ -71,7 +62,6 @@ function setupContentObserver() {
 
 		if (shouldInit) {
 			console.log("Content changed, initializing pagination");
-			// Short delay to ensure rendering is complete
 			setTimeout(initPagination, 100);
 		}
 	});
@@ -84,11 +74,9 @@ function setupContentObserver() {
 	});
 }
 
-// Export setupPagination to allow direct initialization for specific containers
 export function setupPagination(container, retryCount = 0) {
 	const maxRetries = 10;
 
-	// Check if container has content instead of checking for .load class
 	if (container.childElementCount === 0) {
 		if (retryCount < maxRetries) {
 			const delay = Math.min(500 * Math.pow(1.5, retryCount), 5000);
@@ -113,25 +101,19 @@ export function setupPagination(container, retryCount = 0) {
 		existingPagination.remove();
 	}
 
-	// Force a layout reflow to ensure accurate measurements
 	void container.offsetWidth;
 
-	// Use getBoundingClientRect for more accurate width measurement
 	const containerRect = container.getBoundingClientRect();
 	const containerWidth = containerRect.width || container.offsetWidth;
 	const scrollWidth = container.scrollWidth;
 
-	// Add some debug logging
 	console.log(
 		`Container ${container.id}: width=${containerWidth}, scroll=${scrollWidth}`
 	);
 
-	// Calculate cards and force pagination when there are enough cards
 	const cards = container.querySelectorAll(".movieCard");
 	const totalCards = cards.length;
 
-	// Always show pagination if we have more than 2 cards, regardless of width
-	// This ensures pagination is shown even when content barely fits
 	const shouldShowPagination = totalCards > 2;
 
 	if (!shouldShowPagination) {
@@ -142,7 +124,6 @@ export function setupPagination(container, retryCount = 0) {
 	let cardWidth = 320;
 	const viewportWidth = window.innerWidth;
 
-	// Adjusted responsive breakpoints
 	if (viewportWidth < 1024) {
 		cardWidth = 280;
 	} else if (viewportWidth > 1440) {
@@ -154,7 +135,6 @@ export function setupPagination(container, retryCount = 0) {
 		return;
 	}
 
-	// Calculate card width from actual cards if possible
 	if (cards.length > 0) {
 		const sampleCard = cards[0];
 		const sampleWidth = sampleCard.getBoundingClientRect().width;
@@ -163,12 +143,10 @@ export function setupPagination(container, retryCount = 0) {
 		}
 	}
 
-	// Adjusted calculation to ensure we show pagination
-	// Use Math.floor to be more conservative about how many cards fit
 	const visibleCards = Math.max(
 		1,
 		Math.floor(containerWidth / (cardWidth + 20))
-	); // Adding gap
+	);
 	const numPages = Math.max(2, Math.ceil(totalCards / visibleCards));
 
 	container.dataset.totalWidth = scrollWidth.toString();
@@ -317,12 +295,10 @@ function initPagination() {
 	const movieContainers = document.querySelectorAll(".cardContainer");
 	movieContainers.forEach((container) => {
 		if (container.id) {
-			// Removed childElementCount check to force initialization
 			setupPagination(container);
 		}
 	});
 
-	// Add a second attempt with a delay to catch any newly rendered content
 	setTimeout(() => {
 		const containers = document.querySelectorAll(".cardContainer");
 		containers.forEach((container) => {

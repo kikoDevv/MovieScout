@@ -9,7 +9,6 @@ function shuffleArray(array) {
 	return array;
 }
 
-// Track loaded containers
 const containersToLoad = ["#topTen", "#topTvShows", "#newReleased"];
 let loadedContainers = 0;
 let allInitialized = false;
@@ -17,7 +16,6 @@ let allInitialized = false;
 function renderMovieCards(movies, containerId, batchSize = 5) {
 	const container = document.querySelector(containerId);
 
-	// Clear container and ensure it doesn't have animation classes yet
 	container.innerHTML = "";
 	container.classList.remove("reveal-container");
 
@@ -30,7 +28,6 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 			const movie = movies[i];
 			const card = document.createElement("div");
 			card.className = "movieCard";
-			// Don't add reveal-card class yet - will be added by IntersectionObserver
 			card.innerHTML = `
 				<img
 					class="moviesImg"
@@ -71,9 +68,7 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 		} else {
 			console.log(`Finished rendering ${containerId}`);
 
-			// Special handling for #newReleased to ensure its pagination always shows
 			if (containerId === "#newReleased") {
-				// Add a small delay to ensure containers are ready
 				setTimeout(() => {
 					if (
 						!container.nextElementSibling?.classList.contains(
@@ -86,7 +81,6 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 				}, 100);
 			}
 
-			// Check if we've loaded all containers
 			checkAllContainersLoaded();
 		}
 	};
@@ -104,10 +98,8 @@ function checkAllContainersLoaded() {
 		allInitialized = true;
 		console.log("All containers loaded, initializing pagination");
 
-		// Initialize pagination immediately
 		createPaginationDots();
 
-		// Force pagination setup on all containers
 		containersToLoad.forEach((id) => {
 			const container = document.querySelector(id);
 			if (container) {
@@ -115,7 +107,6 @@ function checkAllContainersLoaded() {
 			}
 		});
 
-		// Extra safety check with multiple retries
 		let retryCount = 0;
 		const maxRetries = 3;
 
@@ -140,24 +131,20 @@ function checkAllContainersLoaded() {
 					}
 				});
 
-				retryPagination(); // Schedule next retry
-			}, 500 * retryCount); // Increasing delay
+				retryPagination();
+			}, 500 * retryCount);
 		}
 
 		retryPagination();
 	}
 }
 
-// Helper function to initialize pagination for a specific container
 function initializeContainerPagination(container) {
 	if (container) {
-		// Removed childElementCount check to force setup
-		// Import the specific setup function from scrollIndicator
 		import("./scrollIndicator.js").then((module) => {
 			if (typeof module.setupPagination === "function") {
 				module.setupPagination(container);
 			} else {
-				// Fallback if the function isn't exported
 				createPaginationDots();
 			}
 		});
@@ -219,11 +206,9 @@ export async function fetchData() {
 		});
 	}
 
-	// Final safety net - if pagination doesn't initialize within 5 seconds, force it
 	setTimeout(() => {
 		if (!allInitialized) {
 			console.log("Safety timeout: forcing pagination initialization");
-			// Don't try to add load class anymore, just initialize pagination
 			createPaginationDots();
 			allInitialized = true;
 		}
