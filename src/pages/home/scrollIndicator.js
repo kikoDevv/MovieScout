@@ -1,5 +1,14 @@
 export function createPaginationDots() {
+	// Immediate initialization attempt
 	initPagination();
+
+	// Also initialize on window load for fully rendered content
+	window.addEventListener("load", () => {
+		console.log("Window loaded, initializing pagination");
+		initPagination();
+	});
+
+	// Re-initialize on resize
 	window.addEventListener(
 		"resize",
 		debounce(() => {
@@ -7,9 +16,76 @@ export function createPaginationDots() {
 		}, 250)
 	);
 
+	// Safety timeout for delayed initialization
 	setTimeout(() => {
 		initPagination();
+	}, 1000);
+
+	// Secondary safety timeout
+	setTimeout(() => {
+		const containers = document.querySelectorAll(".cardContainer");
+		containers.forEach((container) => {
+			if (
+				container.classList.contains("load") &&
+				(!container.nextElementSibling ||
+					!container.nextElementSibling.classList.contains(
+						"pagination-container"
+					))
+			) {
+				console.log(`Forcing pagination for ${container.id}`);
+				setupPagination(container);
+			}
+		});
 	}, 2000);
+
+	// Set up mutation observer to detect when content is added
+	setupContentObserver();
+}
+
+// Monitor DOM changes to detect when movie cards are added
+function setupContentObserver() {
+	const movieSection = document.querySelector(".moviesSection");
+	if (!movieSection) return;
+
+	const observer = new MutationObserver((mutations) => {
+		let shouldInit = false;
+
+		mutations.forEach((mutation) => {
+			// If nodes were added and they're movie cards
+			if (mutation.addedNodes.length > 0) {
+				for (let i = 0; i < mutation.addedNodes.length; i++) {
+					const node = mutation.addedNodes[i];
+					if (node.classList && node.classList.contains("movieCard")) {
+						shouldInit = true;
+						break;
+					}
+				}
+			}
+
+			// If the 'load' class was added to a container
+			if (
+				mutation.type === "attributes" &&
+				mutation.attributeName === "class" &&
+				mutation.target.classList.contains("cardContainer") &&
+				mutation.target.classList.contains("load")
+			) {
+				shouldInit = true;
+			}
+		});
+
+		if (shouldInit) {
+			console.log("Content changed, initializing pagination");
+			// Short delay to ensure rendering is complete
+			setTimeout(initPagination, 100);
+		}
+	});
+
+	observer.observe(movieSection, {
+		childList: true,
+		subtree: true,
+		attributes: true,
+		attributeFilter: ["class"],
+	});
 }
 
 // Export setupPagination to allow direct initialization for specific containers
@@ -40,23 +116,56 @@ export function setupPagination(container, retryCount = 0) {
 		existingPagination.remove();
 	}
 
-	const containerWidth = container.offsetWidth;
+	// Force a layout reflow to ensure accurate measurements
+	void container.offsetWidth;
+
+	// Use getBoundingClientRect for more accurate width measurement
+	const containerRect = container.getBoundingClientRect();
+	const containerWidth = containerRect.width || container.offsetWidth;
 	const scrollWidth = container.scrollWidth;
 
-	if (scrollWidth <= containerWidth) return;
+	// Add some debug logging
+	console.log(
+		`Container ${container.id}: width=${containerWidth}, scroll=${scrollWidth}`
+	);
 
+	// Force pagination for mobile/small screens regardless of scroll width
 	const viewportWidth = window.innerWidth;
-	let cardWidth = 320;
+	const forceOnMobile = viewportWidth < 768;
 
+	// Skip pagination only if container is wider than content AND not on mobile
+	if (scrollWidth <= containerWidth && !forceOnMobile) {
+		console.log(`Skipping pagination for ${container.id} - no overflow`);
+		return;
+	}
+
+	let cardWidth = 320;
 	if (viewportWidth < 768) {
 		cardWidth = 280;
 	} else if (viewportWidth > 1440) {
 		cardWidth = 360;
 	}
 
+	// Count actual cards instead of relying on childElementCount
+	const cards = container.querySelectorAll(".movieCard");
+	const totalCards = cards.length;
+
+	if (totalCards === 0) {
+		console.log(`No cards found in ${container.id}, skipping pagination`);
+		return;
+	}
+
+	// Calculate card width from actual cards if possible
+	if (cards.length > 0) {
+		const sampleCard = cards[0];
+		const sampleWidth = sampleCard.getBoundingClientRect().width;
+		if (sampleWidth > 0) {
+			cardWidth = sampleWidth;
+		}
+	}
+
 	const visibleCards = Math.max(1, Math.floor(containerWidth / cardWidth));
-	const totalCards = container.childElementCount;
-	const numPages = Math.ceil(totalCards / visibleCards);
+	const numPages = Math.max(2, Math.ceil(totalCards / visibleCards));
 
 	container.dataset.totalWidth = scrollWidth.toString();
 	container.dataset.viewWidth = containerWidth.toString();
@@ -202,7 +311,7 @@ export function setupPagination(container, retryCount = 0) {
 function initPagination() {
 	const movieContainers = document.querySelectorAll(".cardContainer");
 	movieContainers.forEach((container) => {
-		if (container.id) {
+		if (container.id && container.childElementCount > 0) {
 			setupPagination(container);
 		}
 	});
