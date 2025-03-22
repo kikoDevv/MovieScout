@@ -496,11 +496,6 @@ body {
   bottom: -5px;
 }
 .moviesSection .cardContainer {
-  visibility: hidden;
-  opacity: 0;
-  transform: translateX(200px);
-  transition: transform 0.8s, opacity 0.8s;
-  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0) 3%, rgb(0, 0, 0) 97%, rgba(0, 0, 0, 0));
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(300px, 1fr);
@@ -511,6 +506,7 @@ body {
   will-change: transform, opacity;
   content-visibility: auto;
   contain: layout style paint;
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0) 3%, rgb(0, 0, 0) 97%, rgba(0, 0, 0, 0));
   scroll-behavior: smooth;
 }
 .moviesSection .cardContainer::-webkit-scrollbar {
@@ -610,11 +606,6 @@ body {
 .moviesSection .cardContainer .movieCard .cardInfo .buyBtn:hover {
   background-color: #ffb509;
   color: white;
-}
-.moviesSection .cardContainer.load {
-  visibility: visible;
-  opacity: 1;
-  transform: translateX(0px);
 }
 
 .footer {
@@ -860,12 +851,10 @@ body {
 .cardContainer {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-}
-.cardContainer.load {
   overflow-x: auto;
   scrollbar-width: none;
 }
-.cardContainer.load::-webkit-scrollbar {
+.cardContainer::-webkit-scrollbar {
   display: none;
 }
 

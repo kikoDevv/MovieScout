@@ -26,11 +26,8 @@ export function createPaginationDots() {
 		const containers = document.querySelectorAll(".cardContainer");
 		containers.forEach((container) => {
 			if (
-				container.classList.contains("load") &&
-				(!container.nextElementSibling ||
-					!container.nextElementSibling.classList.contains(
-						"pagination-container"
-					))
+				!container.nextElementSibling ||
+				!container.nextElementSibling.classList.contains("pagination-container")
 			) {
 				console.log(`Forcing pagination for ${container.id}`);
 				setupPagination(container);
@@ -62,12 +59,11 @@ function setupContentObserver() {
 				}
 			}
 
-			// If the 'load' class was added to a container
+			// Check for any changes to cardContainer classes
 			if (
 				mutation.type === "attributes" &&
 				mutation.attributeName === "class" &&
-				mutation.target.classList.contains("cardContainer") &&
-				mutation.target.classList.contains("load")
+				mutation.target.classList.contains("cardContainer")
 			) {
 				shouldInit = true;
 			}
@@ -92,7 +88,8 @@ function setupContentObserver() {
 export function setupPagination(container, retryCount = 0) {
 	const maxRetries = 10;
 
-	if (!container.classList.contains("load")) {
+	// Check if container has content instead of checking for .load class
+	if (container.childElementCount === 0) {
 		if (retryCount < maxRetries) {
 			const delay = Math.min(500 * Math.pow(1.5, retryCount), 5000);
 			setTimeout(() => setupPagination(container, retryCount + 1), delay);

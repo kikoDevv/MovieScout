@@ -4,13 +4,11 @@
 .cardContainer {
 	scroll-behavior: smooth;
 	-webkit-overflow-scrolling: touch;
-	&.load {
-		overflow-x: auto;
-		scrollbar-width: none; // Hide scrollbar in Firefox
+	overflow-x: auto;
+	scrollbar-width: none; // Hide scrollbar in Firefox
 
-		&::-webkit-scrollbar {
-			display: none; // Hide scrollbar in Chrome
-		}
+	&::-webkit-scrollbar {
+		display: none; // Hide scrollbar in Chrome
 	}
 }
 

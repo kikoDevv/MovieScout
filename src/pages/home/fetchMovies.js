@@ -17,9 +17,8 @@ let allInitialized = false;
 function renderMovieCards(movies, containerId, batchSize = 5) {
 	const container = document.querySelector(containerId);
 
-	// Clear container and remove load class
+	// Clear container (removed load class manipulation)
 	container.innerHTML = "";
-	container.classList.remove("load");
 
 	const fragment = document.createDocumentFragment();
 
@@ -70,12 +69,9 @@ function renderMovieCards(movies, containerId, batchSize = 5) {
 		} else {
 			console.log(`Finished rendering ${containerId}`);
 
-			// Add load class when rendering is complete
-			container.classList.add("load");
-
 			// Special handling for #newReleased to ensure its pagination always shows
 			if (containerId === "#newReleased") {
-				// Add a small delay to ensure the load class is applied
+				// Add a small delay to ensure containers are ready
 				setTimeout(() => {
 					if (
 						!container.nextElementSibling?.classList.contains(
@@ -114,7 +110,6 @@ function checkAllContainersLoaded() {
 				const container = document.querySelector(id);
 				if (
 					container &&
-					container.classList.contains("load") &&
 					!container.nextElementSibling?.classList.contains(
 						"pagination-container"
 					)
@@ -129,7 +124,7 @@ function checkAllContainersLoaded() {
 
 // Helper function to initialize pagination for a specific container
 function initializeContainerPagination(container) {
-	if (container && container.classList.contains("load")) {
+	if (container && container.childElementCount > 0) {
 		// Import the specific setup function from scrollIndicator
 		import("./scrollIndicator.js").then((module) => {
 			if (typeof module.setupPagination === "function") {
@@ -192,7 +187,6 @@ export async function fetchData() {
 		containersToLoad.forEach((id) => {
 			const container = document.querySelector(id);
 			if (container) {
-				container.classList.add("load");
 				checkAllContainersLoaded();
 			}
 		});
@@ -202,12 +196,7 @@ export async function fetchData() {
 	setTimeout(() => {
 		if (!allInitialized) {
 			console.log("Safety timeout: forcing pagination initialization");
-			containersToLoad.forEach((id) => {
-				const container = document.querySelector(id);
-				if (container) {
-					container.classList.add("load");
-				}
-			});
+			// Don't try to add load class anymore, just initialize pagination
 			createPaginationDots();
 			allInitialized = true;
 		}
