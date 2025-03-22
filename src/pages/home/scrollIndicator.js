@@ -126,26 +126,28 @@ export function setupPagination(container, retryCount = 0) {
 		`Container ${container.id}: width=${containerWidth}, scroll=${scrollWidth}`
 	);
 
-	// Force pagination for mobile/small screens regardless of scroll width
-	const viewportWidth = window.innerWidth;
-	const forceOnMobile = viewportWidth < 768;
+	// Calculate cards and force pagination when there are enough cards
+	const cards = container.querySelectorAll(".movieCard");
+	const totalCards = cards.length;
 
-	// Skip pagination only if container is wider than content AND not on mobile
-	if (scrollWidth <= containerWidth && !forceOnMobile) {
-		console.log(`Skipping pagination for ${container.id} - no overflow`);
+	// Always show pagination if we have more than 2 cards, regardless of width
+	// This ensures pagination is shown even when content barely fits
+	const shouldShowPagination = totalCards > 2;
+
+	if (!shouldShowPagination) {
+		console.log(`Skipping pagination for ${container.id} - not enough cards`);
 		return;
 	}
 
 	let cardWidth = 320;
-	if (viewportWidth < 768) {
+	const viewportWidth = window.innerWidth;
+
+	// Adjusted responsive breakpoints
+	if (viewportWidth < 1024) {
 		cardWidth = 280;
 	} else if (viewportWidth > 1440) {
 		cardWidth = 360;
 	}
-
-	// Count actual cards instead of relying on childElementCount
-	const cards = container.querySelectorAll(".movieCard");
-	const totalCards = cards.length;
 
 	if (totalCards === 0) {
 		console.log(`No cards found in ${container.id}, skipping pagination`);
@@ -161,12 +163,15 @@ export function setupPagination(container, retryCount = 0) {
 		}
 	}
 
-	const visibleCards = Math.max(1, Math.floor(containerWidth / cardWidth));
+	// Adjusted calculation to ensure we show pagination
+	// Use Math.floor to be more conservative about how many cards fit
+	const visibleCards = Math.max(1, Math.floor(containerWidth / (cardWidth + 20))); // Adding gap
 	const numPages = Math.max(2, Math.ceil(totalCards / visibleCards));
 
 	container.dataset.totalWidth = scrollWidth.toString();
 	container.dataset.viewWidth = containerWidth.toString();
 	container.dataset.numPages = numPages.toString();
+	container.dataset.cardsPerPage = visibleCards.toString();
 
 	const paginationContainer = document.createElement("div");
 	paginationContainer.classList.add("pagination-container");
@@ -308,10 +313,25 @@ export function setupPagination(container, retryCount = 0) {
 function initPagination() {
 	const movieContainers = document.querySelectorAll(".cardContainer");
 	movieContainers.forEach((container) => {
-		if (container.id && container.childElementCount > 0) {
+		if (container.id) { // Removed childElementCount check to force initialization
 			setupPagination(container);
 		}
 	});
+
+	// Add a second attempt with a delay to catch any newly rendered content
+	setTimeout(() => {
+		const containers = document.querySelectorAll(".cardContainer");
+		containers.forEach((container) => {
+			if (
+				container.id &&
+				(!container.nextElementSibling ||
+				!container.nextElementSibling.classList.contains("pagination-container"))
+			) {
+				console.log(`Second attempt at pagination for ${container.id}`);
+				setupPagination(container);
+			}
+		});
+	}, 300);
 }
 
 function scrollToPage(container, pageIndex) {

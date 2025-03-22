@@ -17,9 +17,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 10px auto;
+	margin: 15px auto;
 	position: relative;
 	z-index: 5;
+	min-height: 30px; // Ensure minimal height
+	opacity: 1 !important; // Force visibility
 
 	&.transitioning {
 		pointer-events: none;
@@ -30,6 +32,7 @@
 		display: flex;
 		position: relative;
 		margin: 0 10px;
+		min-width: 60px; // Ensure minimal width
 
 		.dot {
 			width: 10px;
@@ -41,10 +44,13 @@
 			padding: 0;
 			cursor: pointer;
 			transition: transform 0.3s ease, background-color 0.3s ease;
+			// Make dots more visible
+			opacity: 0.8;
 
 			&.active {
 				background-color: #ff5722;
 				transform: scale(1.2);
+				opacity: 1;
 			}
 
 			&.previous {

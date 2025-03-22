@@ -101,30 +101,52 @@ function checkAllContainersLoaded() {
 	if (loadedContainers >= containersToLoad.length && !allInitialized) {
 		allInitialized = true;
 		console.log("All containers loaded, initializing pagination");
-		// Initialize pagination after all containers are loaded
+
+		// Initialize pagination immediately
 		createPaginationDots();
 
-		// Extra safety check after a brief delay
-		setTimeout(() => {
-			containersToLoad.forEach((id) => {
-				const container = document.querySelector(id);
-				if (
-					container &&
-					!container.nextElementSibling?.classList.contains(
-						"pagination-container"
-					)
-				) {
-					console.log(`Reinitializing missing pagination for ${id}`);
-					initializeContainerPagination(container);
-				}
-			});
-		}, 500);
+		// Force pagination setup on all containers
+		containersToLoad.forEach((id) => {
+			const container = document.querySelector(id);
+			if (container) {
+				initializeContainerPagination(container);
+			}
+		});
+
+		// Extra safety check with multiple retries
+		let retryCount = 0;
+		const maxRetries = 3;
+
+		function retryPagination() {
+			if (retryCount >= maxRetries) return;
+
+			retryCount++;
+			console.log(`Pagination safety check attempt ${retryCount}`);
+
+			setTimeout(() => {
+				containersToLoad.forEach((id) => {
+					const container = document.querySelector(id);
+					if (
+						container &&
+						(!container.nextElementSibling ||
+						!container.nextElementSibling.classList.contains("pagination-container"))
+					) {
+						console.log(`Reinitializing missing pagination for ${id}`);
+						initializeContainerPagination(container);
+					}
+				});
+
+				retryPagination(); // Schedule next retry
+			}, 500 * retryCount); // Increasing delay
+		}
+
+		retryPagination();
 	}
 }
 
 // Helper function to initialize pagination for a specific container
 function initializeContainerPagination(container) {
-	if (container && container.childElementCount > 0) {
+	if (container) { // Removed childElementCount check to force setup
 		// Import the specific setup function from scrollIndicator
 		import("./scrollIndicator.js").then((module) => {
 			if (typeof module.setupPagination === "function") {

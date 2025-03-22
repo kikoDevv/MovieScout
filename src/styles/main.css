@@ -862,9 +862,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px auto;
+  margin: 15px auto;
   position: relative;
   z-index: 5;
+  min-height: 30px;
+  opacity: 1 !important;
 }
 .pagination-container.transitioning {
   pointer-events: none;
@@ -873,6 +875,7 @@ body {
   display: flex;
   position: relative;
   margin: 0 10px;
+  min-width: 60px;
 }
 .pagination-container .pagination-dots .dot {
   width: 10px;
@@ -884,10 +887,12 @@ body {
   padding: 0;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
+  opacity: 0.8;
 }
 .pagination-container .pagination-dots .dot.active {
   background-color: #ff5722;
   transform: scale(1.2);
+  opacity: 1;
 }
 .pagination-container .pagination-dots .dot.previous {
   transition: none;
