@@ -1319,6 +1319,7 @@ body {
 }
 .main-cont .detail-modal .right-box .movie-meta {
   display: flex;
+  user-select: none;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 20px;
@@ -1526,6 +1527,7 @@ body {
   padding: 80px 20px;
   position: relative;
   overflow: hidden;
+  user-select: none;
 }
 .subscribe-section .subscribe-container {
   max-width: 1100px;

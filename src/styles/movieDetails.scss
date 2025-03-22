@@ -143,6 +143,7 @@
 			.movie-meta {
 				display: flex;
 				// flex-wrap: wrap;
+				user-select: none;
 				justify-content: space-between;
 				gap: 12px;
 				margin-bottom: 20px;
@@ -286,7 +287,6 @@
 				padding-top: 10px;
 				margin-top: auto;
 				padding-bottom: 10px;
-
 				button {
 					padding: 12px 25px;
 					border: none;
