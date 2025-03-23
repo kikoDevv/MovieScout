@@ -99,9 +99,7 @@ export function lazyloadMovies() {
 export function searchBarSticky() {
 	const searchSection = document.querySelector(".searchSection");
 	const sentinel = document.querySelector(".sentinel");
-
 	if (!searchSection || !sentinel) return;
-
 	const observer = new IntersectionObserver((entries) => {
 		entries.forEach((entry) => {
 			if (!entry.isIntersecting) {

@@ -93,70 +93,50 @@ body {
 .upperSection .sentinel {
   position: absolute;
   z-index: 1000;
-  top: 43%;
+  top: 38%;
   left: 48%;
   transform: translateX(-50%);
 }
 .upperSection .searchSection {
-  display: flex;
+  display: grid;
   position: absolute;
-  z-index: 1000;
-  top: 45%;
-  left: 48%;
+  top: 39%;
+  left: 50%;
   transform: translateX(-50%);
-  min-width: 40vw;
-  min-height: 5vh;
   animation: shrink both;
   animation-timeline: view();
 }
-.upperSection .searchSection .searchBar {
-  border-radius: 5px 0px 0px 5px;
-  border: none;
-  padding-left: 10px;
+.upperSection .searchSection .main-search {
+  display: flex;
   min-width: 100%;
+}
+.upperSection .searchSection .main-search .searchBar {
+  border-radius: 5px;
+  border: none;
+  min-width: 100%;
+  min-height: 5vh;
   animation: roundBorderSearchBar both;
   animation-timeline: view();
 }
-.upperSection .searchSection .searchBar:focus {
+.upperSection .searchSection .main-search .searchBar:focus {
   outline: none;
 }
-.upperSection .searchSection .searchBar::placeholder {
+.upperSection .searchSection .main-search .searchBar::placeholder {
   color: rgba(0, 0, 0, 0.527);
   font-weight: bold;
   padding-left: 10px;
-}
-.upperSection .searchSection .searchBtn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 0px 5px 5px 0px;
-  background-color: rgb(205, 205, 205);
-  color: black;
-  font-family: "Work Sans", sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  animation: roundBorderBtn both;
-  animation-timeline: view();
-}
-.upperSection .searchSection .searchBtn:hover {
-  background-color: #ffb509;
-  color: white;
 }
 .upperSection .searchSection.scrolled {
   position: fixed;
   z-index: 1000;
   top: 1%;
-  left: 48%;
+  left: 50%;
   transform: translateX(-50%);
 }
 
 @keyframes roundBorderSearchBar {
   100% {
-    border-radius: 30px 0px 0px 30px;
-  }
-}
-@keyframes roundBorderBtn {
-  100% {
-    border-radius: 0px 30px 30px 0px;
+    border-radius: 30px;
   }
 }
 .avatarSection {

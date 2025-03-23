@@ -3,7 +3,7 @@ import { fetchData } from "./fetchMovies.js";
 import { searchBarSticky } from "./scrollTiming.js";
 import { filterMenu } from "./filterMenu.js";
 import { setupMovieModal } from "../moviesDetails/movieModal.js";
-
+import { searchModal } from "../../components/search-modal.js";
 // Remove pagination import since it will be called by fetchData
 // import { createPaginationDots } from "./scrollIndicator.js";
 
@@ -17,5 +17,5 @@ searchBarSticky();
 filterMenu();
 //--------Setup movie details modal--------
 setupMovieModal();
-
-// Remove the createPaginationDots() call - it will be called by fetchData after content loads
+//---------------search-modal--------------
+// searchModal();
