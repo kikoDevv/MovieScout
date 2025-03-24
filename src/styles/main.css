@@ -1774,5 +1774,24 @@ body {
     padding: 12px;
   }
 }
+.search-modal {
+  display: grid;
+  background-color: aliceblue;
+  margin-top: 5px;
+  border-radius: 20px;
+}
+.search-modal .search-card {
+  display: flex;
+  margin: 10px;
+  background-color: rgb(134, 151, 151);
+  height: 10vh;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.search-modal .search-card .search-info-container {
+  display: grid;
+  width: 100%;
+  padding-left: 10px;
+}
 
 /*# sourceMappingURL=main.css.map */
