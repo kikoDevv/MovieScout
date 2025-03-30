@@ -17,4 +17,3 @@ filterMenu();
 setupMovieModal();
 //---------------search-modal--------------
 searchModal();
-//---------------fetch search value--------

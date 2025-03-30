@@ -116,11 +116,13 @@ body {
 			min-width: 100%;
 			.searchBar {
 				border-radius: 5px;
+				padding: 0px 20px;
 				border: none;
 				min-width: 100%;
 			 	min-height: 5vh;
 				animation: roundBorderSearchBar both;
 				animation-timeline: view();
+				font-weight: bold;
 				&:focus {
 					outline: none;
 				}
