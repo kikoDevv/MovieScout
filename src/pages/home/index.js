@@ -4,6 +4,7 @@ import { searchBarSticky } from "./scrollTiming.js";
 import { filterMenu } from "./filterMenu.js";
 import { setupMovieModal } from "../moviesDetails/movieModal.js";
 import { searchModal } from "../../components/search-modal.js";
+import { fetchSearch } from "../../components/fetch-search.js";
 //------------creates movie card and fetchs data from IMDB api-----------------
 fetchData();
 //-------lazy load movieCard animation--------
@@ -16,3 +17,4 @@ filterMenu();
 setupMovieModal();
 //---------------search-modal--------------
 searchModal();
+//---------------fetch search value--------

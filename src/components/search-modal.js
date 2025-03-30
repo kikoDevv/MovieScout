@@ -1,16 +1,67 @@
+import { fetchSearch } from "./fetch-search.js"; // Fix import path
+
 export function searchModal() {
 	const searchSection = document.querySelector(".searchSection");
 	const searchModal = document.createElement("div");
 	searchModal.classList.add("search-modal");
 	searchSection.appendChild(searchModal);
-    //---------listen for input from searchbar--------
-    const searchInput = document.querySelector(".searchBar");
-    searchInput.addEventListener("input", (e) =>{
-        const searchValue = e.target.value.trim();
-        console.log(searchValue);
-    })
-	//----------create search card-----------
-	createSearchCard(searchModal, "/src/pics/11.jpeg", "The movie title");
+
+	//---------listen for input from searchbar--------
+	const searchInput = document.querySelector(".searchBar");
+
+	searchInput.addEventListener("input", async (e) => {
+		const searchValue = e.target.value.trim();
+		searchModal.innerHTML = "";
+		if (searchValue) {
+			try {
+				//----Show loading state
+				const loadingCard = document.createElement("div");
+				loadingCard.classList.add("search-card", "loading");
+				loadingCard.textContent = "Searching...";
+				searchModal.appendChild(loadingCard);
+
+				//----Fetch search results
+				const searchResults = await fetchSearch(searchValue);
+				console.log("search result:ss", searchResults);
+				//----Clear loading state
+				searchModal.innerHTML = "";
+
+				if (
+					searchResults &&
+					searchResults.results &&
+					searchResults.results.length > 0
+				) {
+					//----Limit to first 5 results for better UX
+					const limitedResults = searchResults.results.slice(0, 5);
+
+					limitedResults.forEach((movie) => {
+						//------image-----------
+						const imageUrl = movie.primaryImage || "/src/pics/notFound.jpeg";
+
+						createSearchCard(
+							searchModal,
+							imageUrl,
+							movie.primaryTitle || movie.originalTitle || "Shit, 404!"
+						);
+					});
+				} else {
+					createSearchCard(
+						searchModal,
+						"/src/pics/notFound.jpeg",
+						"No results found"
+					);
+				}
+			} catch (error) {
+				console.error("Error processing search:", error);
+				searchModal.innerHTML = "";
+				createSearchCard(
+					searchModal,
+					"/src/pics/notFound.jpeg",
+					"Error searching movies"
+				);
+			}
+		}
+	});
 }
 
 //---------func to create search card--------
