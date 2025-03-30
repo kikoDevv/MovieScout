@@ -104,7 +104,7 @@ export function searchModal() {
 			searchModal.appendChild(errorCard);
 		}
 	}
-//-----------key board navigation func-----------
+	//-----------key board navigation func-----------
 	function navigateResults(direction) {
 		const cards = searchModal.querySelectorAll(
 			".search-card:not(.loading):not(.no-results):not(.error)"
@@ -122,7 +122,7 @@ export function searchModal() {
 		cards[selectedIndex].classList.add("selected");
 		cards[selectedIndex].scrollIntoView({ block: "nearest" });
 	}
-//---------------on click takes user to movie details modal---------
+	//---------------on click takes user to movie details modal---------
 	function handleResultSelection(movie) {
 		console.log("Selected movie:", movie);
 
