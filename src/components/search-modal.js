@@ -85,7 +85,20 @@ export function searchModal() {
 					const year = movie.releaseDate || movie.startYear || "Unknown year";
 					const title =
 						movie.primaryTitle || movie.originalTitle || "Title not found";
-					const searchCard = createSearchCard(imageUrl, title, year);
+
+					// Extract additional information
+					const type = getContentType(movie);
+					const runtime = getRuntime(movie);
+					const rating = getRating(movie);
+
+					const searchCard = createSearchCard(
+						imageUrl,
+						title,
+						year,
+						type,
+						runtime,
+						rating
+					);
 					//-----click even for each card
 					searchCard.addEventListener("click", () => {
 						handleResultSelection(movie);
@@ -104,6 +117,44 @@ export function searchModal() {
 			searchModal.appendChild(errorCard);
 		}
 	}
+
+	// Helper functions to extract movie information
+	function getContentType(movie) {
+		if (!movie) return null;
+
+		if (movie.titleType) {
+			const type = movie.titleType.toLowerCase();
+			if (type.includes("tv") || type.includes("series")) return "TV Show";
+			if (type.includes("movie")) return "Movie";
+			if (type.includes("short")) return "Short";
+		}
+
+		// Check if it has episodes or seasons
+		if (movie.numberOfEpisodes || movie.numberOfSeasons) return "TV Show";
+
+		return "Movie";
+	}
+
+	function getRuntime(movie) {
+		if (!movie || !movie.runtime) return null;
+
+		if (typeof movie.runtime === "number") {
+			return `${movie.runtime} min`;
+		}
+
+		return movie.runtime;
+	}
+
+	function getRating(movie) {
+		if (!movie) return null;
+
+		if (movie.ratingsSummary && movie.ratingsSummary.aggregateRating) {
+			return movie.ratingsSummary.aggregateRating;
+		}
+
+		return null;
+	}
+
 	//-----------key board navigation func-----------
 	function navigateResults(direction) {
 		const cards = searchModal.querySelectorAll(
@@ -179,7 +230,7 @@ export function searchModal() {
 		return errorCard;
 	}
 
-	function createSearchCard(img, title, year) {
+	function createSearchCard(img, title, year, type, runtime, rating) {
 		const searchCard = document.createElement("div");
 		searchCard.classList.add("search-card");
 
@@ -198,15 +249,56 @@ export function searchModal() {
 		searchedTitle.classList.add("searched-title");
 		searchedTitle.textContent = title;
 
+		const boxInfo = document.createElement("div");
+		boxInfo.classList.add("boxInfo");
+
+		if (type) {
+			const typeElement = document.createElement("span");
+			typeElement.classList.add("searched-type");
+			typeElement.textContent = type;
+			boxInfo.appendChild(typeElement);
+		}
+
 		const searchedYear = document.createElement("p");
 		searchedYear.classList.add("searched-year");
-		searchedYear.textContent = year;
 
-		searchInfoCont.appendChild(searchedTitle);
-		searchInfoCont.appendChild(searchedYear);
+		let yearText = "N/A";
+		if (year && year !== "Unknown year") {
+			if (typeof year === "string" && year.includes("-")) {
+				yearText = year.substring(0, 4);
+			} else {
+				yearText = year;
+			}
+		}
+		searchedYear.textContent = yearText;
+		boxInfo.appendChild(searchedYear);
+
+		if (runtime) {
+			const runtimeElement = document.createElement("p");
+			runtimeElement.classList.add("searched-runtime");
+			runtimeElement.textContent = runtime;
+			boxInfo.appendChild(runtimeElement);
+		}
+
+		if (rating) {
+			const ratingElement = document.createElement("div");
+			ratingElement.classList.add("searched-rating");
+
+			const starIcon = document.createElement("i");
+			starIcon.classList.add("fas", "fa-star");
+
+			const ratingText = document.createElement("span");
+			ratingText.textContent = parseFloat(rating).toFixed(1);
+
+			ratingElement.appendChild(starIcon);
+			ratingElement.appendChild(ratingText);
+			boxInfo.appendChild(ratingElement);
+		}
 
 		searchCard.appendChild(searchImg);
 		searchCard.appendChild(searchInfoCont);
+		searchInfoCont.appendChild(searchedTitle);
+		searchInfoCont.appendChild(boxInfo);
 
 		return searchCard;
 	}

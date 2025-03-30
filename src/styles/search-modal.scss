@@ -85,16 +85,80 @@
 				overflow-x: hidden;
 			}
 
-			.searched-year {
-				font-family: "Work Sans", sans-serif;
-				font-size: 0.85rem;
-				color: rgba(255, 255, 255, 0.7);
-				margin: 4px 0 0;
-				padding: 0;
+			.boxInfo {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-top: 8px;
+				flex-wrap: wrap;
+
+				.searched-year {
+					font-family: "Work Sans", sans-serif;
+					font-size: 0.85rem;
+					color: rgba(255, 255, 255, 0.7);
+					margin: 0;
+					padding: 0;
+					display: flex;
+					align-items: center;
+
+					&:before {
+						content: "\f073"; /* Calendar icon */
+						font-family: "Font Awesome 5 Free";
+						margin-right: 4px;
+						opacity: 0.85;
+						color: #ffb509;
+					}
+				}
+
+				.searched-type {
+					background-color: rgba(255, 181, 9, 0.15);
+					padding: 2px 8px;
+					border-radius: 10px;
+					font-size: 0.75rem;
+					font-weight: 500;
+					color: #ffb509;
+					border: 1px solid rgba(255, 181, 9, 0.3);
+				}
+
+				.searched-runtime {
+					font-family: "Work Sans", sans-serif;
+					font-size: 0.85rem;
+					color: rgba(255, 255, 255, 0.7);
+					margin: 0;
+					padding: 0;
+					display: flex;
+					align-items: center;
+
+					&:before {
+						content: "\f017"; /* Clock icon */
+						font-family: "Font Awesome 5 Free";
+						margin-right: 4px;
+						opacity: 0.85;
+						color: #ffb509;
+					}
+				}
+
+				.searched-rating {
+					display: flex;
+					align-items: center;
+					gap: 3px;
+
+					i {
+						color: #ffb509;
+						font-size: 0.85rem;
+					}
+
+					span {
+						font-family: "Work Sans", sans-serif;
+						font-size: 0.85rem;
+						color: white;
+						font-weight: 500;
+					}
+				}
 			}
 		}
 
-		// Loading card style
+		// Loading card style with improved animation
 		&.loading {
 			cursor: default;
 			display: grid;
