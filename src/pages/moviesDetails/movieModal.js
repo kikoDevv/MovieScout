@@ -30,6 +30,50 @@ export function setupMovieModal() {
 			closeMovieModal();
 		}
 	});
+
+	document.addEventListener("movieSelected", (event) => {
+		const movie = event.detail.movie;
+		if (movie) {
+			const tempMovieCard = createTempMovieCard(movie);
+			openMovieModal(tempMovieCard);
+		}
+	});
+}
+
+function createTempMovieCard(movie) {
+	const tempCard = document.createElement("div");
+	tempCard.className = "movieCard";
+
+	const imageUrl = movie.primaryImage || "/src/pics/notFound.jpeg";
+	const title = movie.primaryTitle || movie.originalTitle || "Title not found";
+	const year = movie.releaseDate
+		? movie.releaseDate.substring(0, 4)
+		: movie.startYear || "Unknown";
+	const rating =
+		movie.ratingsSummary && movie.ratingsSummary.aggregateRating
+			? parseFloat(movie.ratingsSummary.aggregateRating).toFixed(1)
+			: "N/A";
+	const runtime = movie.runtime ? `${movie.runtime} min` : "N/A";
+
+	tempCard.innerHTML = `
+		<img class="moviesImg" src="${imageUrl}" alt="${title} poster">
+		<div class="cardInfo">
+			<h3 class="moviesName">${title}</h3>
+			<div class="movieInfo">
+				<div class="rating">
+					<span class="ratingNumber">${rating}</span>
+				</div>
+				<div class="year">
+					<p class="yearNumber">${year}</p>
+				</div>
+				<div class="runtime">
+					<p class="runtimeNumber">${runtime}</p>
+				</div>
+			</div>
+		</div>
+	`;
+
+	return tempCard;
 }
 
 function injectModalHTML() {

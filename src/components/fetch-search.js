@@ -1,24 +1,22 @@
 export async function fetchSearch(value) {
-	// Sanitize and optimize the search term
 	const searchTerm = value.trim();
 
 	if (searchTerm.length < 2) {
-		return { results: [] }; // Return empty results for very short queries
+		return { results: [] };
 	}
 
-	// Prepare different search terms for better accuracy
 	const exactSearchTerm = searchTerm;
 	const fuzzySearchTerm = searchTerm.toLowerCase();
 
-	// Use different search parameters with appropriate weights
 	const searchUrl =
 		`https://imdb236.p.rapidapi.com/imdb/search?` +
 		`originalTitle=${encodeURIComponent(exactSearchTerm)}` +
 		`&originalTitleAutocomplete=${encodeURIComponent(fuzzySearchTerm)}` +
 		`&primaryTitle=${encodeURIComponent(exactSearchTerm)}` +
 		`&primaryTitleAutocomplete=${encodeURIComponent(fuzzySearchTerm)}` +
-		`&sortOrder=DESC` + // Show best matches first
-		`&limit=10`; // Limit results for faster response
+		`&titleType=movie,tvSeries,tvMiniSeries,tvSpecial` +
+		`&sortOrder=DESC` +
+		`&limit=30`;
 
 	const Key = "07807008b3msh7188004c6c5cd67p18ca7bjsnbc847e4ae696";
 
@@ -28,7 +26,7 @@ export async function fetchSearch(value) {
 			headers: {
 				"x-rapidapi-host": "imdb236.p.rapidapi.com",
 				"x-rapidapi-key": Key,
-				"cache-control": "no-cache", // Ensure fresh results
+				"cache-control": "no-cache",
 			},
 		});
 
@@ -38,26 +36,62 @@ export async function fetchSearch(value) {
 
 		const data = await response.json();
 
-		// Post-process results to improve relevance
 		if (data && data.results && data.results.length > 0) {
-			// Sort results by relevance - exact matches first
 			data.results.sort((a, b) => {
 				const titleA = (a.primaryTitle || a.originalTitle || "").toLowerCase();
 				const titleB = (b.primaryTitle || b.originalTitle || "").toLowerCase();
 
-				// Exact match gets highest priority
 				if (titleA === searchTerm.toLowerCase()) return -1;
 				if (titleB === searchTerm.toLowerCase()) return 1;
 
-				// Starts with search term gets next priority
 				const aStartsWithTerm = titleA.startsWith(searchTerm.toLowerCase());
 				const bStartsWithTerm = titleB.startsWith(searchTerm.toLowerCase());
 				if (aStartsWithTerm && !bStartsWithTerm) return -1;
 				if (!aStartsWithTerm && bStartsWithTerm) return 1;
 
-				// Otherwise keep original order
+				if (
+					a.ratingsSummary?.aggregateRating &&
+					b.ratingsSummary?.aggregateRating
+				) {
+					return (
+						b.ratingsSummary.aggregateRating - a.ratingsSummary.aggregateRating
+					);
+				}
+
 				return 0;
 			});
+
+			const movies = data.results.filter((item) =>
+				item.titleType?.toLowerCase().includes("movie")
+			);
+			const tvShows = data.results.filter(
+				(item) =>
+					item.titleType?.toLowerCase().includes("tv") ||
+					item.titleType?.toLowerCase().includes("series")
+			);
+
+			if (movies.length > 0 && tvShows.length > 0) {
+				const mixedResults = [];
+				const maxPerType = 5;
+
+				for (
+					let i = 0;
+					i <
+					Math.max(
+						Math.min(movies.length, maxPerType),
+						Math.min(tvShows.length, maxPerType)
+					);
+					i++
+				) {
+					if (i < movies.length) mixedResults.push(movies[i]);
+					if (i < tvShows.length) mixedResults.push(tvShows[i]);
+				}
+
+				const remaining = data.results.filter(
+					(item) => !mixedResults.includes(item)
+				);
+				data.results = [...mixedResults, ...remaining];
+			}
 		}
 
 		console.log("Search results:", data);

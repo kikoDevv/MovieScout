@@ -15,6 +15,7 @@ export function searchModal() {
 	document.addEventListener("click", (e) => {
 		if (!searchModal.contains(e.target) && e.target !== searchInput) {
 			searchModal.classList.remove("active");
+			searchInput.value = "";
 		}
 	});
 
@@ -118,19 +119,26 @@ export function searchModal() {
 		}
 	}
 
-	// Helper functions to extract movie information
 	function getContentType(movie) {
 		if (!movie) return null;
 
 		if (movie.titleType) {
 			const type = movie.titleType.toLowerCase();
 			if (type.includes("tv") || type.includes("series")) return "TV Show";
+			if (type.includes("mini") && type.includes("series"))
+				return "Mini Series";
 			if (type.includes("movie")) return "Movie";
 			if (type.includes("short")) return "Short";
 		}
 
-		// Check if it has episodes or seasons
 		if (movie.numberOfEpisodes || movie.numberOfSeasons) return "TV Show";
+
+		if (
+			movie.runtime &&
+			movie.runtime < 35 &&
+			movie.titleType?.toLowerCase().includes("episode")
+		)
+			return "TV Show";
 
 		return "Movie";
 	}
@@ -255,6 +263,12 @@ export function searchModal() {
 		if (type) {
 			const typeElement = document.createElement("span");
 			typeElement.classList.add("searched-type");
+
+			// Add content-specific styling
+			typeElement.classList.add(
+				type === "TV Show" ? "tv-show-badge" : "movie-badge"
+			);
+
 			typeElement.textContent = type;
 			boxInfo.appendChild(typeElement);
 		}
