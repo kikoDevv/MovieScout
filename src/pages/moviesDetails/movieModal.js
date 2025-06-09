@@ -1,4 +1,5 @@
 import { findTrailer } from "./trailerFinder.js";
+import config from "../../config/config.js";
 
 export function setupMovieModal() {
 	injectModalHTML();
@@ -220,11 +221,7 @@ async function openMovieModal(movieCard) {
 	}, 50);
 
 	try {
-		const apiKey = "7ae0a5d36394abcbfe893ebb3cd504f9";
-		const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
-			name
-		)}`;
-
+		const searchUrl = config.getTmdbSearchUrl(name);
 		const searchResponse = await fetch(searchUrl);
 		const searchData = await searchResponse.json();
 

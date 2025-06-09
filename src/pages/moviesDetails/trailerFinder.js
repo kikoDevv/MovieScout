@@ -1,7 +1,8 @@
+import config from "../../config/config.js";
+
 export async function findTrailer(movieTitle) {
 	if (!movieTitle) return;
 
-	const apiKey = "7ae0a5d36394abcbfe893ebb3cd504f9";
 	const trailerFrame = document.getElementById("trailerFrame");
 
 	if (trailerFrame) {
@@ -14,16 +15,13 @@ export async function findTrailer(movieTitle) {
 	}
 
 	try {
-		const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
-			movieTitle
-		)}`;
+		const searchUrl = config.getTmdbSearchUrl(movieTitle);
 		const searchResponse = await fetch(searchUrl);
 		const searchData = await searchResponse.json();
 
 		if (searchData.results && searchData.results.length > 0) {
 			const movieId = searchData.results[0].id;
-
-			const videosUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`;
+			const videosUrl = config.getTmdbVideosUrl(movieId);
 			const videosResponse = await fetch(videosUrl);
 			const videosData = await videosResponse.json();
 

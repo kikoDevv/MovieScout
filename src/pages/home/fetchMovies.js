@@ -1,5 +1,6 @@
 import { createMovieCard } from "./createMovieCard.js";
 import { createPaginationDots } from "./scrollIndicator.js";
+import config from "../../config/config.js";
 
 function shuffleArray(array) {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -157,21 +158,38 @@ export async function fetchData() {
 	loadedContainers = 0;
 	allInitialized = false;
 
-	const urlMoves = "https://imdb236.p.rapidapi.com/imdb/most-popular-movies";
-	const urlTvShows = "https://imdb236.p.rapidapi.com/imdb/most-popular-tv";
+	const urlMoves = config.getMoviesUrl();
+	const urlTvShows = config.getTvShowsUrl();
 	const options = {
 		method: "GET",
-		headers: {
-			"x-rapidapi-key": "07807008b3msh7188004c6c5cd67p18ca7bjsnbc847e4ae696",
-			"x-rapidapi-host": "imdb236.p.rapidapi.com",
-		},
+		headers: config.getApiHeaders(),
 	};
+
+	console.log("Fetching movies from:", urlMoves); // Debug log
+	console.log("Fetching TV shows from:", urlTvShows); // Debug log
+
 	try {
 		//---------------get top movies--------------
 		const response = await fetch(urlMoves, options);
+		console.log("Movies response status:", response.status); // Debug log
+
+		if (!response.ok) {
+			throw new Error(
+				`Movies API error: ${response.status} ${response.statusText}`
+			);
+		}
+
 		const data = await response.json();
+		console.log("Movies API response:", data); // Debug log
+
+		// Check if data has the expected structure
+		if (!data || !Array.isArray(data)) {
+			console.error("Invalid movies data structure:", data);
+			throw new Error("Invalid movies data structure received");
+		}
+
 		const topRatedMovies = data.sort(
-			(a, b) => b.averageRating - a.averageRating
+			(a, b) => (b.averageRating || 0) - (a.averageRating || 0)
 		);
 		const random30Movies = shuffleArray(topRatedMovies).slice(0, 30);
 
@@ -180,9 +198,25 @@ export async function fetchData() {
 
 		//---------get top tv shows----------------
 		const responseTvShow = await fetch(urlTvShows, options);
+		console.log("TV shows response status:", responseTvShow.status); // Debug log
+
+		if (!responseTvShow.ok) {
+			throw new Error(
+				`TV shows API error: ${responseTvShow.status} ${responseTvShow.statusText}`
+			);
+		}
+
 		const tvShowData = await responseTvShow.json();
+		console.log("TV shows API response:", tvShowData); // Debug log
+
+		// Check if tvShowData has the expected structure
+		if (!tvShowData || !Array.isArray(tvShowData)) {
+			console.error("Invalid TV shows data structure:", tvShowData);
+			throw new Error("Invalid TV shows data structure received");
+		}
+
 		const topTvShows = tvShowData
-			.sort((a, b) => b.averageRating - a.averageRating)
+			.sort((a, b) => (b.averageRating || 0) - (a.averageRating || 0))
 			.slice(0, 30);
 
 		//--------------generate tv shows cards----------------
@@ -190,12 +224,12 @@ export async function fetchData() {
 
 		//-----------get new release movies------------------
 		const newReleased = data
-			.sort((a, b) => b.startYear - a.startYear)
+			.sort((a, b) => (b.startYear || 0) - (a.startYear || 0))
 			.slice(0, 30);
 
 		renderMovieCards(newReleased, "#newReleased");
 	} catch (error) {
-		console.error(error);
+		console.error("Fetch error details:", error);
 
 		// Handle error case by marking containers as loaded
 		containersToLoad.forEach((id) => {
